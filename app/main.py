@@ -1,15 +1,6 @@
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
+from app.routers import candidates
 
-from .dependencies import get_query_token, get_token_header
-from .internal import admin
-from .routers import candidates
+app =FastAPI(title= "Smart ATS API")
 
-app = FastAPI(dependencies=[Depends(get_query_token)])
-
-
-app.include_router(candidates.router)
-
-
-@app.get("/")
-async def root():
-    return {"message": "Hello Bigger Applications!"}
+app.include_router(candidates.router,prefix='/api/v1')
