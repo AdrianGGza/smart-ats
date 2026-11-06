@@ -69,7 +69,7 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
               <div className="lg:col-span-7 space-y-4">
                 <p className="text-[14px] font-medium text-[#6b6b6b]">
-                  Motor local FastAPI · Filtrado Polars (&ge; 2 años de experiencia) · Persistencia Supabase
+                  Motor FastAPI en Render · Filtrado Polars (&ge; 2 años de experiencia) · Persistencia Supabase
                 </p>
                 <h1 className="taste-h1">
                   Evaluación de currículums para equipos de talento.
@@ -200,7 +200,7 @@ export default function App() {
                 <div className="rounded-[12px] bg-[#ffffff] border border-[#111111]/12 p-6 space-y-6">
                   <div className="flex items-center justify-between border-b border-[#111111]/10 pb-4">
                     <span className="text-[13px] font-medium text-[#111111]">
-                      Arquitectura de ejecución local
+                      Arquitectura de ejecución en la nube
                     </span>
                     <span className="font-mono text-[12px] text-[#1a4be0]">
                       Pydantic · AnalisisCVCandidato

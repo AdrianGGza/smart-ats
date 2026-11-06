@@ -42,7 +42,7 @@ export default function CandidateResults({ candidates, onClear, onLoadDemo }) {
             <h2 className="taste-h2">
               Candidatos evaluados y puntaje de compatibilidad.{' '}
               <span className="text-[#6b6b6b]">
-                Ordenados por ingreso desde la API local.
+                Ordenados por ingreso desde la API en la nube.
               </span>
             </h2>
           </div>
