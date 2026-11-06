@@ -67,7 +67,7 @@ export default function BatchUploadDropzone({ onBatchProcessed }) {
     } catch (err) {
       setError(
         err.message ||
-          'No se pudo procesar el archivo CSV en http://localhost:8000/procesar-batch.'
+          'No se pudo procesar el archivo CSV en https://smart-ats-0c5l.onrender.com/procesar-batch.'
       );
     } finally {
       setIsLoading(false);

@@ -66,7 +66,7 @@ export default function Header({ totalEvaluados, activeTab, onSelectTab }) {
         <div className="flex items-center gap-4">
           <span className="hidden lg:inline-flex items-center gap-2 font-mono text-[13px] text-[#6b6b6b]">
             <span className="w-2 h-2 rounded-full bg-[#111111]" />
-            localhost:8000
+            smart-ats-0c5l.onrender.com
           </span>
           <a
             href="#workspace"

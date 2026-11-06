@@ -1,12 +1,10 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-
 /**
  * Envía el texto plano de un CV al endpoint POST /analizar-cv
  * @param {string} textoCv - Contenido en texto plano del CV
  * @returns {Promise<Object>} Resultado del análisis validado por el backend
  */
 export async function analizarCV(textoCv) {
-  const response = await fetch(`${API_BASE_URL}/analizar-cv`, {
+  const response = await fetch('https://smart-ats-0c5l.onrender.com/analizar-cv', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -41,7 +39,7 @@ export async function procesarBatchCSV(csvFile) {
   const formData = new FormData();
   formData.append('file', csvFile);
 
-  const response = await fetch(`${API_BASE_URL}/procesar-batch`, {
+  const response = await fetch('https://smart-ats-0c5l.onrender.com/procesar-batch', {
     method: 'POST',
     body: formData,
   });

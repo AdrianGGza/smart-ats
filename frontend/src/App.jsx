@@ -119,8 +119,8 @@ export default function App() {
                     <span className="text-[#6b6b6b]">·</span>
                     <span className="font-mono text-[12px] text-[#6b6b6b]">
                       {activeTab === 'single'
-                        ? 'POST http://localhost:8000/analizar-cv'
-                        : 'POST http://localhost:8000/procesar-batch'}
+                        ? 'POST https://smart-ats-0c5l.onrender.com/analizar-cv'
+                        : 'POST https://smart-ats-0c5l.onrender.com/procesar-batch'}
                     </span>
                   </div>
 
@@ -254,7 +254,7 @@ export default function App() {
                 Evalúa tu próximo lote de candidatos hoy.
               </h2>
               <p className="text-[16px] text-[#9a9a9a]">
-                Conectado al servidor local en el puerto 8000.
+                Conectado al servidor de producción en Render (smart-ats-0c5l.onrender.com).
               </p>
             </div>
 

@@ -29,7 +29,7 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
     } catch (err) {
       setError(
         err.message ||
-          'No se pudo conectar con http://localhost:8000/analizar-cv. Verifica que el backend FastAPI esté activo.'
+          'No se pudo conectar con https://smart-ats-0c5l.onrender.com/analizar-cv. Verifica que el backend esté activo.'
       );
     } finally {
       setIsLoading(false);
