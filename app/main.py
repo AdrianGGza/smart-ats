@@ -1,6 +1,20 @@
 from fastapi import FastAPI, File
+from fastapi.middleware.cors import CORSMiddleware
 from app.routers import candidates
 
 app =FastAPI(title= "Smart ATS API")
+origenes_permitidos = [
+    "http://localhost:5173", 
+    "http://localhost:3000",
+]
 
-app.include_router(candidates.router,prefix='/api/v1')
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origenes_permitidos,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(candidates.router)
