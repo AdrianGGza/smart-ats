@@ -1,15 +1,34 @@
 /**
- * Envía el texto plano de un CV al endpoint POST /analizar-cv
- * @param {string} textoCv - Contenido en texto plano del CV
+ * Envía el texto plano de un CV y los criterios de la vacante al endpoint POST /analizar-cv
+ * @param {string|Object} textoCvOrPayload - Contenido en texto plano del CV u objeto con { texto_cv, criterios_vacante }
+ * @param {string|null} [criteriosVacante=null] - Criterios opcionales de la vacante deseada
  * @returns {Promise<Object>} Resultado del análisis validado por el backend
  */
-export async function analizarCV(textoCv) {
+export async function analizarCV(textoCvOrPayload, criteriosVacante = null) {
+  let texto_cv = '';
+  let criterios_vacante = null;
+
+  if (typeof textoCvOrPayload === 'object' && textoCvOrPayload !== null) {
+    texto_cv = textoCvOrPayload.texto_cv ?? '';
+    criterios_vacante = textoCvOrPayload.criterios_vacante ?? null;
+  } else {
+    texto_cv = textoCvOrPayload;
+    criterios_vacante = criteriosVacante;
+  }
+
+  const payload = {
+    criterios_vacante: (typeof criterios_vacante === 'string' && criterios_vacante.trim() !== '')
+      ? criterios_vacante.trim()
+      : (criterios_vacante || null),
+    texto_cv: texto_cv,
+  };
+
   const response = await fetch('https://smart-ats-0c5l.onrender.com/analizar-cv', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ texto_cv: textoCv }),
+    body: JSON.stringify(payload),
   });
 
   if (!response.ok) {

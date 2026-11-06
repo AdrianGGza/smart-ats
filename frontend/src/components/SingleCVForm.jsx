@@ -8,6 +8,7 @@ Especialista en Python, FastAPI, Polars, PostgreSQL, Docker, Kubernetes y despli
 Redujo la latencia de procesamiento de lotes en un 45% migrando pipelines hacia Polars en memoria.`;
 
 export default function SingleCVForm({ onCandidateAnalyzed }) {
+  const [criterios_vacante, setCriteriosVacante] = useState('');
   const [textoCv, setTextoCv] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -24,7 +25,10 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
     setError(null);
 
     try {
-      const resultado = await analizarCV(trimmed);
+      const resultado = await analizarCV({
+        criterios_vacante: criterios_vacante.trim() || null,
+        texto_cv: trimmed,
+      });
       onCandidateAnalyzed(resultado);
     } catch (err) {
       setError(
@@ -64,6 +68,27 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
       <div>
         <div className="flex items-center justify-between mb-2">
           <label
+            htmlFor="criterios-vacante-textarea"
+            className="text-[13px] font-medium text-[#111111]"
+          >
+            Criterios de la vacante <span className="text-[#6b6b6b] font-normal">(Opcional)</span>
+          </label>
+        </div>
+
+        <textarea
+          id="criterios-vacante-textarea"
+          rows={3}
+          value={criterios_vacante}
+          onChange={(e) => setCriteriosVacante(e.target.value)}
+          disabled={isLoading}
+          placeholder="Ej. Busco un desarrollador especializado en React... (Opcional)"
+          className="w-full rounded-[12px] bg-[#f4f4f4] border border-[#111111]/15 focus:bg-[#ffffff] focus:border-[#1a4be0] focus:ring-2 focus:ring-[#1a4be0]/15 p-4 text-[16px] leading-[1.5] text-[#111111] placeholder-[#6b6b6b] outline-none transition-all resize-y disabled:opacity-60"
+        />
+      </div>
+
+      <div>
+        <div className="flex items-center justify-between mb-2">
+          <label
             htmlFor="cv-plain-textarea"
             className="text-[13px] font-medium text-[#111111]"
           >
@@ -93,11 +118,12 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
         </p>
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
-          {textoCv && (
+          {(textoCv || criterios_vacante) && (
             <button
               type="button"
               onClick={() => {
                 setTextoCv('');
+                setCriteriosVacante('');
                 setError(null);
               }}
               disabled={isLoading}
