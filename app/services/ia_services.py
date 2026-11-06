@@ -6,14 +6,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-async def procesar_cv_gemini(texto: str):
+async def procesar_cv_gemini(texto: str, criterios_vacante: str | None = None):
     client = genai.Client(api_key=os.environ.get('GEMINI_API_KEY'))
-    
-    instruccion = f"Analiza el siguiente CV y extrae los datos solicitados:\n\n{texto}"
+
+    if criterios_vacante:
+        prompt = f"Analiza el siguiente CV. Calcula el match_score basándote estrictamente en qué tan bien cumple con estos requerimientos específicos: {criterios_vacante}\n\nCV:\n{texto}"
+    else:
+        prompt = f"Analiza el siguiente CV y extrae la información solicitada. Calcula un match_score general basándote en la solidez del perfil:\n\nCV:\n{texto}"  
 
     interaction = client.interactions.create(
         model= 'gemini-3.5-flash-lite',
-        input=instruccion,
+        input=prompt,
         response_format={
             "type": "text",
             "mime_type": "application/json", 

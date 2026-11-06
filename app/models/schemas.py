@@ -1,6 +1,7 @@
 from pydantic import BaseModel,Field
 
-class CVInput(BaseModel):
+class PeticionCV(BaseModel):
+    criterios_vacante : str | None
     texto_cv: str
 
 class AnalisisCVCandidato(BaseModel):
