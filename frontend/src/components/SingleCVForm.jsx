@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { FileText, Send, Loader2, Sparkles, RotateCcw } from 'lucide-react';
 import { analizarCV } from '../services/atsApi';
 import ErrorAlert from './ErrorAlert';
 
 const EJEMPLO_CV = `María Fernanda Gómez
-Ingeniera de Software Full Stack con 5 años de experiencia diseñando arquitecturas escalables y microservicios.
-Experiencia trabajando con Python, FastAPI, React, TypeScript, PostgreSQL, Docker y AWS.
-Lideró la migración de monolito a servicios distribuidos reduciendo tiempos de respuesta en un 40%.`;
+Ingeniera de Software Senior con 6 años de experiencia en desarrollo backend y sistemas de datos.
+Especialista en Python, FastAPI, Polars, PostgreSQL, Docker, Kubernetes y despliegues en AWS.
+Redujo la latencia de procesamiento de lotes en un 45% migrando pipelines hacia Polars en memoria.`;
 
 export default function SingleCVForm({ onCandidateAnalyzed }) {
   const [textoCv, setTextoCv] = useState('');
@@ -17,7 +16,7 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
     e.preventDefault();
     const trimmed = textoCv.trim();
     if (!trimmed) {
-      setError('Por favor ingresa o pega el texto del CV antes de analizar.');
+      setError('Escribe o pega el texto del currículum antes de enviarlo.');
       return;
     }
 
@@ -28,71 +27,72 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
       const resultado = await analizarCV(trimmed);
       onCandidateAnalyzed(resultado);
     } catch (err) {
-      setError(err.message || 'No se pudo conectar con el servidor backend en http://localhost:8000');
+      setError(
+        err.message ||
+          'No se pudo conectar con http://localhost:8000/analizar-cv. Verifica que el backend FastAPI esté activo.'
+      );
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleLoadSample = () => {
-    setTextoCv(EJEMPLO_CV);
-    setError(null);
-  };
-
   return (
-    <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 shadow-xl">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-            <FileText className="w-5 h-5" />
-          </div>
-          <div>
-            <h2 className="text-base font-semibold text-white">
-              Análisis Individual de CV
-            </h2>
-            <p className="text-xs text-slate-400">
-              Endpoint <code className="text-indigo-300 font-mono">POST /analizar-cv</code> (JSON)
-            </p>
-          </div>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-[#111111]/10 pb-4">
+        <div>
+          <h3 className="text-[20px] font-medium text-[#111111] tracking-[-0.02em]">
+            Extrae habilidades y compatibilidad desde texto plano
+          </h3>
+          <p className="text-[16px] text-[#6b6b6b] mt-1">
+            Envía el perfil al endpoint <code className="font-mono text-[14px] text-[#111111]">POST /analizar-cv</code> y almacena el resultado en Supabase.
+          </p>
         </div>
 
         <button
           type="button"
-          onClick={handleLoadSample}
+          onClick={() => {
+            setTextoCv(EJEMPLO_CV);
+            setError(null);
+          }}
           disabled={isLoading}
-          className="text-xs text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/20 transition-colors disabled:opacity-50"
+          className="taste-btn-secondary h-[38px] px-4 text-[14px]"
         >
-          <Sparkles className="w-3.5 h-3.5" />
-          Cargar CV de prueba
+          Cargar perfil de ejemplo
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
+      <div>
+        <div className="flex items-center justify-between mb-2">
           <label
-            htmlFor="cv-textarea"
-            className="block text-xs font-medium text-slate-300 mb-2"
+            htmlFor="cv-plain-textarea"
+            className="text-[13px] font-medium text-[#111111]"
           >
-            Texto completo del Currículum Vitae
+            Texto del currículum (experiencia, tecnologías y logros)
           </label>
-          <textarea
-            id="cv-textarea"
-            rows={7}
-            value={textoCv}
-            onChange={(e) => setTextoCv(e.target.value)}
-            disabled={isLoading}
-            placeholder="Pega aquí el contenido del CV del candidato (experiencia, educación, habilidades técnicas...)"
-            className="w-full rounded-xl bg-slate-950/80 border border-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 text-sm text-slate-100 placeholder-slate-500 p-3.5 transition-all outline-none resize-y disabled:opacity-60"
-          />
-          <div className="flex justify-between items-center mt-1.5 text-[11px] text-slate-500">
-            <span>Se extraerá: nombre, años de experiencia, skills y match score.</span>
-            <span>{textoCv.length} caracteres</span>
-          </div>
+          <span className="font-mono text-[13px] text-[#6b6b6b]">
+            {textoCv.length} caracteres
+          </span>
         </div>
 
-        <ErrorAlert message={error} onClose={() => setError(null)} />
+        <textarea
+          id="cv-plain-textarea"
+          rows={6}
+          value={textoCv}
+          onChange={(e) => setTextoCv(e.target.value)}
+          disabled={isLoading}
+          placeholder="Pega aquí el contenido completo del CV en texto plano..."
+          className="w-full rounded-[12px] bg-[#f4f4f4] border border-[#111111]/15 focus:bg-[#ffffff] focus:border-[#1a4be0] focus:ring-2 focus:ring-[#1a4be0]/15 p-4 text-[16px] leading-[1.5] text-[#111111] placeholder-[#6b6b6b] outline-none transition-all resize-y disabled:opacity-60"
+        />
+      </div>
 
-        <div className="flex items-center justify-end gap-2.5 pt-1">
+      <ErrorAlert message={error} onClose={() => setError(null)} />
+
+      <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
+        <p className="text-[14px] text-[#6b6b6b]">
+          Esquema validado: <span className="font-mono text-[13px] text-[#111111]">name, experiencia_years, habilidades_tecnicas, match_score</span>
+        </p>
+
+        <div className="flex items-center gap-3 w-full sm:w-auto">
           {textoCv && (
             <button
               type="button"
@@ -101,33 +101,39 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
                 setError(null);
               }}
               disabled={isLoading}
-              className="px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors flex items-center gap-1.5 disabled:opacity-50"
+              className="taste-btn-secondary flex-1 sm:flex-initial"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
-              Limpiar
+              Limpiar texto
             </button>
           )}
 
           <button
             type="submit"
             disabled={isLoading || !textoCv.trim()}
-            className="px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 disabled:bg-slate-800 disabled:text-slate-500 transition-all shadow-lg shadow-indigo-600/20 flex items-center gap-2"
+            className="taste-btn-primary flex-1 sm:flex-initial"
           >
             {isLoading ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                Analizando con IA...
+                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <span>Analizando currículum...</span>
               </>
             ) : (
               <>
-                <Send className="w-4 h-4" />
-                Analizar Candidato
+                <span>Evaluar candidato</span>
+                <svg
+                  className="m-arrow w-4 h-4"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                >
+                  <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </>
             )}
           </button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 }
-

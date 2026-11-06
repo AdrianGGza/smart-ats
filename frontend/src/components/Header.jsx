@@ -1,42 +1,91 @@
-import { Sparkles, Activity } from 'lucide-react';
+export default function Header({ totalEvaluados, activeTab, onSelectTab }) {
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'auto' });
+    }
+  };
 
-export default function Header({ totalEvaluados }) {
   return (
-    <header className="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/25">
-            <Sparkles className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-lg font-bold tracking-tight text-white">
-                Smart ATS
-              </h1>
-              <span className="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
-                AI Powered
-              </span>
-            </div>
-            <p className="text-xs text-slate-400">
-              Sistema Inteligente de Evaluación y Filtrado de Candidatos
-            </p>
-          </div>
-        </div>
+    <header className="fixed top-0 left-0 right-0 h-[56px] sm:h-[72px] bg-[#ffffff] border-b border-[#111111]/12 z-20">
+      <div className="taste-wrap h-full flex items-center justify-between">
+        {/* Brand mark (stack geometry) + Wordmark */}
+        <a
+          href="#top"
+          className="flex items-center gap-3 text-[#111111] no-underline group"
+        >
+          <span
+            aria-hidden="true"
+            className="w-7 h-7 rounded-[6px] bg-[#111111] text-[#ffffff] flex items-center justify-center font-mono text-[13px] font-medium tracking-tight"
+          >
+            S
+          </span>
+          <span className="text-[20px] font-medium tracking-[-0.03em] text-[#111111]">
+            Smart ATS
+          </span>
+        </a>
 
+        {/* Plain one-word nouns navigation (system.md rule) */}
+        <nav aria-label="Navegación principal" className="hidden md:flex items-center gap-8">
+          <button
+            type="button"
+            onClick={() => {
+              onSelectTab('single');
+              scrollToSection('workspace');
+            }}
+            aria-current={activeTab === 'single' ? 'page' : undefined}
+            className="taste-nav-link bg-transparent border-0 cursor-pointer"
+          >
+            Individual
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              onSelectTab('batch');
+              scrollToSection('workspace');
+            }}
+            aria-current={activeTab === 'batch' ? 'page' : undefined}
+            className="taste-nav-link bg-transparent border-0 cursor-pointer"
+          >
+            Lotes
+          </button>
+          <a href="#resultados" className="taste-nav-link no-underline">
+            Candidatos
+            {totalEvaluados > 0 && (
+              <span className="ml-1.5 font-mono text-[13px] text-[#1a4be0]">
+                ({totalEvaluados})
+              </span>
+            )}
+          </a>
+          <a href="#arquitectura" className="taste-nav-link no-underline">
+            Flujo
+          </a>
+        </nav>
+
+        {/* Single main action button ending on the right edge */}
         <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800/70 border border-slate-700/60 text-xs text-slate-300">
-            <Activity className="w-3.5 h-3.5 text-emerald-400" />
-            <span>API:</span>
-            <code className="text-emerald-400 font-mono">localhost:8000</code>
-          </div>
-          {totalEvaluados > 0 && (
-            <div className="px-3 py-1.5 rounded-lg bg-indigo-500/10 border border-indigo-500/30 text-xs font-medium text-indigo-300">
-              {totalEvaluados} {totalEvaluados === 1 ? 'candidato evaluado' : 'candidatos evaluados'}
-            </div>
-          )}
+          <span className="hidden lg:inline-flex items-center gap-2 font-mono text-[13px] text-[#6b6b6b]">
+            <span className="w-2 h-2 rounded-full bg-[#111111]" />
+            localhost:8000
+          </span>
+          <a
+            href="#workspace"
+            onClick={() => onSelectTab('single')}
+            className="taste-btn-primary no-underline"
+          >
+            <span>Evaluar candidato</span>
+            <svg
+              className="m-arrow w-4 h-4"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.75"
+            >
+              <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
         </div>
       </div>
     </header>
   );
 }
-

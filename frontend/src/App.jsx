@@ -1,9 +1,29 @@
 import { useState } from 'react';
-import { FileText, FileSpreadsheet } from 'lucide-react';
 import Header from './components/Header';
 import SingleCVForm from './components/SingleCVForm';
 import BatchUploadDropzone from './components/BatchUploadDropzone';
 import CandidateResults from './components/CandidateResults';
+
+const DEMO_CANDIDATES = [
+  {
+    name: 'María Fernanda Gómez',
+    experiencia_years: 6,
+    habilidades_tecnicas: ['Python', 'FastAPI', 'Polars', 'PostgreSQL', 'Docker', 'AWS'],
+    match_score: 94.5,
+  },
+  {
+    name: 'Andrés Silva',
+    experiencia_years: 5,
+    habilidades_tecnicas: ['Python', 'React', 'Supabase', 'TypeScript', 'SQL'],
+    match_score: 86.0,
+  },
+  {
+    name: 'Carlos Mendoza',
+    experiencia_years: 3,
+    habilidades_tecnicas: ['FastAPI', 'Pandas', 'Git', 'Linux'],
+    match_score: 72.0,
+  },
+];
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('single'); // 'single' | 'batch'
@@ -11,11 +31,17 @@ export default function App() {
 
   const handleSingleCandidate = (nuevoCandidato) => {
     setCandidates((prev) => [nuevoCandidato, ...prev]);
+    setTimeout(() => {
+      document.getElementById('resultados')?.scrollIntoView({ behavior: 'auto' });
+    }, 80);
   };
 
   const handleBatchCandidates = (listaCandidatos) => {
     if (Array.isArray(listaCandidatos)) {
       setCandidates((prev) => [...listaCandidatos, ...prev]);
+      setTimeout(() => {
+        document.getElementById('resultados')?.scrollIntoView({ behavior: 'auto' });
+      }, 80);
     }
   };
 
@@ -23,67 +49,252 @@ export default function App() {
     setCandidates([]);
   };
 
+  const handleLoadDemo = () => {
+    setCandidates(DEMO_CANDIDATES);
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100">
-      <Header totalEvaluados={candidates.length} />
+    <div id="top" className="min-h-screen flex flex-col bg-[#ffffff] text-[#111111]">
+      <Header
+        totalEvaluados={candidates.length}
+        activeTab={activeTab}
+        onSelectTab={setActiveTab}
+      />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        {/* Selector de modo de operación */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
-          <div>
-            <h2 className="text-xl font-bold text-white">
-              Panel de Recepción de Currículums
-            </h2>
-            <p className="text-sm text-slate-400 mt-0.5">
-              Analiza un candidato individual en texto plano o procesa un lote CSV filtrado automáticamente.
-            </p>
-          </div>
+      <main className="flex-1 pt-[56px] sm:pt-[72px]">
+        {/* Screen 1: Hero + Live App-Frame Workspace */}
+        <section className="py-12 sm:py-20 bg-[#ffffff]">
+          <div className="taste-wrap space-y-10">
+            {/* Hero Head Row: Category + Buyer in H1, Hard Fact in sub-line (copy.md Rules 1 & 2) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+              <div className="lg:col-span-7 space-y-4">
+                <p className="text-[14px] font-medium text-[#6b6b6b]">
+                  Motor local FastAPI · Filtrado Polars (&ge; 2 años de experiencia) · Persistencia Supabase
+                </p>
+                <h1 className="taste-h1">
+                  Evaluación de currículums para equipos de talento.
+                </h1>
+              </div>
 
-          <div className="inline-flex rounded-xl bg-slate-900 p-1.5 border border-slate-800 self-start">
-            <button
-              type="button"
-              onClick={() => setActiveTab('single')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
-                activeTab === 'single'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/25'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
+              <div className="lg:col-span-5 space-y-5">
+                <p className="text-[18px] leading-[1.55] text-[#111111]">
+                  Extrae habilidades técnicas y calcula el <code className="font-mono text-[15px]">match_score</code> de 0 a 100 desde texto plano o lotes CSV en un solo paso.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab('single')}
+                    className={
+                      activeTab === 'single' ? 'taste-btn-primary' : 'taste-btn-secondary'
+                    }
+                  >
+                    <span>Evaluar CV individual</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab('batch')}
+                    className={
+                      activeTab === 'batch' ? 'taste-btn-primary' : 'taste-btn-secondary'
+                    }
+                  >
+                    <span>Subir lote CSV</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Software App-Frame (sections.md: The product big across the .wrap) */}
+            <div
+              id="workspace"
+              className="rounded-[20px] p-3 sm:p-5 taste-panel-sky border border-[#111111]/12"
             >
-              <FileText className="w-4 h-4" />
-              CV Individual (JSON)
-            </button>
+              <div className="rounded-[14px] bg-[#ffffff] border border-[#111111]/12 overflow-hidden">
+                {/* App Window Header */}
+                <div className="px-5 py-3.5 bg-[#f4f4f4] border-b border-[#111111]/10 flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[13px] font-medium text-[#111111]">
+                      Consola de ingesta ATS
+                    </span>
+                    <span className="text-[#6b6b6b]">·</span>
+                    <span className="font-mono text-[12px] text-[#6b6b6b]">
+                      {activeTab === 'single'
+                        ? 'POST http://localhost:8000/analizar-cv'
+                        : 'POST http://localhost:8000/procesar-batch'}
+                    </span>
+                  </div>
 
-            <button
-              type="button"
-              onClick={() => setActiveTab('batch')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
-                activeTab === 'batch'
-                  ? 'bg-violet-600 text-white shadow-md shadow-violet-600/25'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <FileSpreadsheet className="w-4 h-4" />
-              Lote CSV (Batch)
-            </button>
+                  {/* Click-only mode tabs (motion.md: Tabs on software, click only) */}
+                  <div
+                    role="tablist"
+                    aria-label="Seleccionar endpoint de entrada"
+                    className="inline-flex rounded-[8px] bg-[#ffffff] p-1 border border-[#111111]/12"
+                  >
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={activeTab === 'single'}
+                      onClick={() => setActiveTab('single')}
+                      className={`px-3.5 py-1.5 rounded-[6px] text-[13px] font-medium transition-colors ${
+                        activeTab === 'single'
+                          ? 'bg-[#111111] text-[#ffffff]'
+                          : 'text-[#6b6b6b] hover:text-[#111111]'
+                      }`}
+                    >
+                      1. Texto plano (/analizar-cv)
+                    </button>
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={activeTab === 'batch'}
+                      onClick={() => setActiveTab('batch')}
+                      className={`px-3.5 py-1.5 rounded-[6px] text-[13px] font-medium transition-colors ${
+                        activeTab === 'batch'
+                          ? 'bg-[#111111] text-[#ffffff]'
+                          : 'text-[#6b6b6b] hover:text-[#111111]'
+                      }`}
+                    >
+                      2. Archivo CSV (/procesar-batch)
+                    </button>
+                  </div>
+                </div>
+
+                {/* App Window Body */}
+                <div className="p-6 sm:p-8">
+                  {activeTab === 'single' ? (
+                    <SingleCVForm onCandidateAnalyzed={handleSingleCandidate} />
+                  ) : (
+                    <BatchUploadDropzone onBatchProcessed={handleBatchCandidates} />
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-
-        {/* Formulario Activo */}
-        <section>
-          {activeTab === 'single' ? (
-            <SingleCVForm onCandidateAnalyzed={handleSingleCandidate} />
-          ) : (
-            <BatchUploadDropzone onBatchProcessed={handleBatchCandidates} />
-          )}
         </section>
 
-        {/* Resultados Renderizados (Cards / Tabla con Match Score destacado) */}
+        {/* Screen 2: Candidate Results (Cards & Table) */}
         <CandidateResults
           candidates={candidates}
           onClear={handleClearResults}
+          onLoadDemo={handleLoadDemo}
         />
+
+        {/* Screen 3: Pipeline Diagram & Technical Specs (sections.md: calm section before close) */}
+        <section id="arquitectura" className="py-24 bg-[#ffffff] border-t border-[#111111]/10">
+          <div className="taste-wrap grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div className="lg:col-span-5 space-y-4">
+              <h2 className="taste-h2">
+                Flujo de validación en memoria.{' '}
+                <span className="text-[#6b6b6b]">
+                  De la petición HTTP a Supabase.
+                </span>
+              </h2>
+              <p className="text-[16px] leading-[1.6] text-[#111111]/85">
+                Cada petición valida estrictamente el esquema con Pydantic antes de registrar al candidato en PostgreSQL, garantizando tipos exactos para el puntaje y los años de experiencia.
+              </p>
+            </div>
+
+            {/* Diagram Card (SKILL.md rule 7: one input, a main processor, three parallel lanes) */}
+            <div className="lg:col-span-7">
+              <div className="taste-card taste-panel-sand p-6 sm:p-8">
+                <div className="rounded-[12px] bg-[#ffffff] border border-[#111111]/12 p-6 space-y-6">
+                  <div className="flex items-center justify-between border-b border-[#111111]/10 pb-4">
+                    <span className="text-[13px] font-medium text-[#111111]">
+                      Arquitectura de ejecución local
+                    </span>
+                    <span className="font-mono text-[12px] text-[#1a4be0]">
+                      Pydantic · AnalisisCVCandidato
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="rounded-[10px] bg-[#f4f4f4] p-4 space-y-1.5 border border-[#111111]/8">
+                      <span className="font-mono text-[12px] text-[#6b6b6b]">01 · Entrada</span>
+                      <p className="text-[16px] font-medium text-[#111111]">
+                        JSON o CSV
+                      </p>
+                      <p className="text-[14px] text-[#6b6b6b]">
+                        Lectura directa en RAM mediante <code className="font-mono text-[12px]">io.BytesIO</code> y filtro Polars.
+                      </p>
+                    </div>
+
+                    <div className="rounded-[10px] bg-[#f4f4f4] p-4 space-y-1.5 border border-[#111111]/8">
+                      <span className="font-mono text-[12px] text-[#1a4be0]">02 · Inferencia</span>
+                      <p className="text-[16px] font-medium text-[#111111]">
+                        Google Gemini
+                      </p>
+                      <p className="text-[14px] text-[#6b6b6b]">
+                        Extracción estructurada con <code className="font-mono text-[12px]">model_json_schema()</code>.
+                      </p>
+                    </div>
+
+                    <div className="rounded-[10px] bg-[#f4f4f4] p-4 space-y-1.5 border border-[#111111]/8">
+                      <span className="font-mono text-[12px] text-[#6b6b6b]">03 · Registro</span>
+                      <p className="text-[16px] font-medium text-[#111111]">
+                        Supabase DB
+                      </p>
+                      <p className="text-[14px] text-[#6b6b6b]">
+                        Inserción inmediata en la tabla <code className="font-mono text-[12px]">candidatos</code>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+
+      {/* Footer.closing (system.md: row 1 dealt close, row 2 directory & legal) */}
+      <footer className="bg-[#111111] text-[#ffffff] py-16">
+        <div className="taste-wrap space-y-12">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-12 border-b border-white/15">
+            <div className="space-y-2">
+              <h2 className="text-[28px] sm:text-[36px] font-medium tracking-[-0.03em] text-[#ffffff]">
+                Evalúa tu próximo lote de candidatos hoy.
+              </h2>
+              <p className="text-[16px] text-[#9a9a9a]">
+                Conectado al servidor local en el puerto 8000.
+              </p>
+            </div>
+
+            <a
+              href="#workspace"
+              onClick={() => setActiveTab('single')}
+              className="taste-btn-primary bg-[#ffffff] text-[#111111] hover:bg-[#f4f4f4] no-underline shrink-0"
+            >
+              <span>Evaluar candidato</span>
+            </a>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[14px] text-[#9a9a9a]">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-6 rounded-[5px] bg-[#ffffff] text-[#111111] inline-flex items-center justify-center font-mono text-[12px] font-medium">
+                S
+              </span>
+              <span className="text-[#ffffff] font-medium">Smart ATS</span>
+              <span>·</span>
+              <span>© {new Date().getFullYear()}</span>
+            </div>
+
+            <div className="flex flex-wrap gap-6">
+              <a href="#workspace" className="text-[#9a9a9a] hover:text-[#ffffff] no-underline">
+                Ingesta individual
+              </a>
+              <a
+                href="#workspace"
+                onClick={() => setActiveTab('batch')}
+                className="text-[#9a9a9a] hover:text-[#ffffff] no-underline"
+              >
+                Procesamiento CSV
+              </a>
+              <a href="#resultados" className="text-[#9a9a9a] hover:text-[#ffffff] no-underline">
+                Resultados
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
-

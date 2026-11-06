@@ -1,264 +1,271 @@
 import { useState } from 'react';
-import {
-  Award,
-  Briefcase,
-  Code2,
-  LayoutGrid,
-  Table as TableIcon,
-  Trash2,
-  UserCheck,
-} from 'lucide-react';
 
-/**
- * Devuelve clases de color dinámicas según el match_score (0 - 100)
- */
-function getScoreBadgeStyle(score) {
+const LIT_PANELS = ['taste-panel-sky', 'taste-panel-sand', 'taste-panel-sage'];
+
+function getScoreMeta(score) {
   const num = Number(score) || 0;
   if (num >= 80) {
     return {
-      badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/40 ring-emerald-500/20',
-      bar: 'bg-gradient-to-r from-emerald-500 to-teal-400',
-      label: 'Alto Match',
+      label: 'Compatibilidad alta',
+      pill: 'bg-[#111111] text-[#ffffff]',
+      barColor: '#1a4be0',
     };
   }
   if (num >= 60) {
     return {
-      badge: 'bg-amber-500/15 text-amber-300 border-amber-500/40 ring-amber-500/20',
-      bar: 'bg-gradient-to-r from-amber-500 to-yellow-400',
-      label: 'Match Medio',
+      label: 'Compatibilidad media',
+      pill: 'bg-[#f4f4f4] text-[#111111] border border-[#111111]/20',
+      barColor: '#111111',
     };
   }
   return {
-    badge: 'bg-rose-500/15 text-rose-300 border-rose-500/40 ring-rose-500/20',
-    bar: 'bg-gradient-to-r from-rose-500 to-orange-500',
-    label: 'Match Bajo',
+    label: 'Compatibilidad baja',
+    pill: 'bg-[#f4f4f4] text-[#6b6b6b] border border-[#111111]/15',
+    barColor: '#6b6b6b',
   };
 }
 
-export default function CandidateResults({ candidates, onClear }) {
+export default function CandidateResults({ candidates, onClear, onLoadDemo }) {
   const [viewMode, setViewMode] = useState('cards'); // 'cards' | 'table'
 
-  if (!candidates || candidates.length === 0) {
-    return (
-      <div className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-10 text-center">
-        <div className="w-12 h-12 rounded-2xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center mx-auto text-slate-400 mb-3">
-          <UserCheck className="w-6 h-6" />
-        </div>
-        <h3 className="text-sm font-semibold text-slate-300">
-          Sin candidatos evaluados aún
-        </h3>
-        <p className="text-xs text-slate-500 max-w-md mx-auto mt-1">
-          Envía un CV en texto plano o sube un archivo CSV por lotes para visualizar las tarjetas de compatibilidad y el <code className="text-slate-400">match_score</code> calculado por Gemini.
-        </p>
-      </div>
-    );
-  }
+  const hasCandidates = Array.isArray(candidates) && candidates.length > 0;
 
   return (
-    <section className="space-y-4">
-      {/* Barra de controles de resultados */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-900/70 border border-slate-800 px-5 py-3.5 rounded-2xl">
-        <div className="flex items-center gap-2.5">
-          <Award className="w-5 h-5 text-indigo-400" />
-          <h2 className="text-base font-semibold text-white">
-            Resultados de Evaluación
-          </h2>
-          <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700 font-medium">
-            {candidates.length} {candidates.length === 1 ? 'registro' : 'registros'}
-          </span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <div className="inline-flex rounded-xl bg-slate-950 p-1 border border-slate-800">
-            <button
-              type="button"
-              onClick={() => setViewMode('cards')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                viewMode === 'cards'
-                  ? 'bg-indigo-600 text-white shadow'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <LayoutGrid className="w-3.5 h-3.5" />
-              Tarjetas
-            </button>
-            <button
-              type="button"
-              onClick={() => setViewMode('table')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                viewMode === 'table'
-                  ? 'bg-indigo-600 text-white shadow'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <TableIcon className="w-3.5 h-3.5" />
-              Tabla
-            </button>
+    <section
+      id="resultados"
+      className="py-24 bg-[#f4f4f4] border-t border-[#111111]/10"
+    >
+      <div className="taste-wrap space-y-12">
+        {/* Section Head (top-aligned on left line, layout-v4.md) */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="space-y-3 max-w-[62ch]">
+            <h2 className="taste-h2">
+              Candidatos evaluados y puntaje de compatibilidad.{' '}
+              <span className="text-[#6b6b6b]">
+                Ordenados por ingreso desde la API local.
+              </span>
+            </h2>
           </div>
 
-          <button
-            type="button"
-            onClick={onClear}
-            className="p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-slate-800/80 border border-transparent hover:border-slate-700 transition-colors"
-            title="Limpiar resultados de la vista"
-          >
-            <Trash2 className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-
-      {/* Vista en Tarjetas (Cards) */}
-      {viewMode === 'cards' ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {candidates.map((cand, idx) => {
-            const score = Number(cand.match_score ?? 0);
-            const styles = getScoreBadgeStyle(score);
-            const skills = Array.isArray(cand.habilidades_tecnicas)
-              ? cand.habilidades_tecnicas
-              : [];
-
-            return (
-              <article
-                key={`${cand.name}-${idx}`}
-                className="bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-2xl p-5 flex flex-col justify-between shadow-lg transition-all"
-              >
-                <div>
-                  {/* Cabecera con Nombre y Match Score destacado */}
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <div className="min-w-0">
-                      <span className="text-[11px] font-medium uppercase tracking-wider text-slate-400">
-                        Candidato
-                      </span>
-                      <h3 className="text-base font-bold text-white truncate">
-                        {cand.name || 'Sin nombre'}
-                      </h3>
-                    </div>
-
-                    <div
-                      className={`px-3 py-1.5 rounded-xl border ring-2 text-right shrink-0 ${styles.badge}`}
-                    >
-                      <div className="text-[10px] uppercase tracking-wider font-semibold opacity-80">
-                        Match Score
-                      </div>
-                      <div className="text-lg font-extrabold leading-tight">
-                        {score.toFixed(1)}%
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Barra visual de Match Score */}
-                  <div className="mb-4">
-                    <div className="h-2 w-full rounded-full bg-slate-950 overflow-hidden border border-slate-800">
-                      <div
-                        className={`h-full rounded-full transition-all duration-500 ${styles.bar}`}
-                        style={{ width: `${Math.min(Math.max(score, 0), 100)}%` }}
-                      />
-                    </div>
-                    <div className="flex justify-between items-center mt-1 text-[11px] text-slate-400">
-                      <span>{styles.label}</span>
-                      <span>Guardado en Supabase</span>
-                    </div>
-                  </div>
-
-                  {/* Años de experiencia */}
-                  <div className="flex items-center gap-2 text-xs text-slate-300 bg-slate-950/60 px-3 py-2 rounded-xl border border-slate-800/80 mb-3">
-                    <Briefcase className="w-4 h-4 text-indigo-400 shrink-0" />
-                    <span>Experiencia profesional:</span>
-                    <strong className="text-white ml-auto">
-                      {cand.experiencia_years ?? 0}{' '}
-                      {cand.experiencia_years === 1 ? 'año' : 'años'}
-                    </strong>
-                  </div>
-
-                  {/* Habilidades técnicas */}
-                  <div>
-                    <div className="flex items-center gap-1.5 text-xs font-medium text-slate-400 mb-2">
-                      <Code2 className="w-3.5 h-3.5 text-violet-400" />
-                      <span>Habilidades Técnicas ({skills.length})</span>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {skills.length > 0 ? (
-                        skills.map((skill, sIdx) => (
-                          <span
-                            key={`${skill}-${sIdx}`}
-                            className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800/90 text-slate-200 border border-slate-700/70"
-                          >
-                            {skill}
-                          </span>
-                        ))
-                      ) : (
-                        <span className="text-xs text-slate-500 italic">
-                          Sin habilidades especificadas
-                        </span>
-                      )}
-                    </div>
-                  </div>
+          <div className="flex flex-wrap items-center gap-3">
+            {hasCandidates && (
+              <>
+                <div
+                  role="tablist"
+                  aria-label="Modo de visualización"
+                  className="inline-flex rounded-[8px] bg-[#ffffff] p-1 border border-[#111111]/12"
+                >
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={viewMode === 'cards'}
+                    onClick={() => setViewMode('cards')}
+                    className={`px-3.5 py-1.5 rounded-[6px] text-[14px] font-medium transition-colors ${
+                      viewMode === 'cards'
+                        ? 'bg-[#111111] text-[#ffffff]'
+                        : 'text-[#6b6b6b] hover:text-[#111111]'
+                    }`}
+                  >
+                    Tarjetas
+                  </button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={viewMode === 'table'}
+                    onClick={() => setViewMode('table')}
+                    className={`px-3.5 py-1.5 rounded-[6px] text-[14px] font-medium transition-colors ${
+                      viewMode === 'table'
+                        ? 'bg-[#111111] text-[#ffffff]'
+                        : 'text-[#6b6b6b] hover:text-[#111111]'
+                    }`}
+                  >
+                    Tabla estructurada
+                  </button>
                 </div>
-              </article>
-            );
-          })}
-        </div>
-      ) : (
-        /* Vista en Tabla Estructurada */
-        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-slate-800 bg-slate-950/60 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                  <th className="py-3.5 px-4">Candidato</th>
-                  <th className="py-3.5 px-4">Experiencia</th>
-                  <th className="py-3.5 px-4">Habilidades Técnicas</th>
-                  <th className="py-3.5 px-4 text-right">Match Score</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-800/70 text-sm">
-                {candidates.map((cand, idx) => {
-                  const score = Number(cand.match_score ?? 0);
-                  const styles = getScoreBadgeStyle(score);
-                  const skills = Array.isArray(cand.habilidades_tecnicas)
-                    ? cand.habilidades_tecnicas
-                    : [];
 
-                  return (
-                    <tr
-                      key={`${cand.name}-${idx}`}
-                      className="hover:bg-slate-800/40 transition-colors"
-                    >
-                      <td className="py-3.5 px-4 font-semibold text-white whitespace-nowrap">
-                        {cand.name || 'Sin nombre'}
-                      </td>
-                      <td className="py-3.5 px-4 text-slate-300 whitespace-nowrap">
-                        {cand.experiencia_years ?? 0}{' '}
-                        {cand.experiencia_years === 1 ? 'año' : 'años'}
-                      </td>
-                      <td className="py-3.5 px-4">
-                        <div className="flex flex-wrap gap-1.5">
-                          {skills.map((skill, sIdx) => (
+                <button
+                  type="button"
+                  onClick={onClear}
+                  className="taste-btn-secondary h-[40px] px-4 text-[14px] bg-[#ffffff]"
+                >
+                  Limpiar lista
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Empty state or Results */}
+        {!hasCandidates ? (
+          <div className="taste-card bg-[#ffffff] flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+            <div className="space-y-2 max-w-[58ch]">
+              <p className="text-[13px] font-medium text-[#6b6b6b]">
+                Bandeja de evaluación vacía
+              </p>
+              <h3 className="text-[20px] font-medium text-[#111111]">
+                Aún no se han procesado currículums en esta sesión
+              </h3>
+              <p className="text-[16px] text-[#6b6b6b]">
+                Utiliza el formulario superior para enviar un CV al endpoint{' '}
+                <code className="font-mono text-[14px] text-[#111111]">/analizar-cv</code> o sube un archivo CSV a{' '}
+                <code className="font-mono text-[14px] text-[#111111]">/procesar-batch</code>.
+              </p>
+            </div>
+
+            {onLoadDemo && (
+              <button
+                type="button"
+                onClick={onLoadDemo}
+                className="taste-btn-secondary shrink-0"
+              >
+                Previsualizar tarjetas con datos de muestra
+              </button>
+            )}
+          </div>
+        ) : viewMode === 'cards' ? (
+          /* Cards Grid (4+4+4 layout on 12-col grid, cards.md two-level rule: card > lit panel > UI fragment) */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {candidates.map((cand, idx) => {
+              const score = Number(cand.match_score ?? 0);
+              const meta = getScoreMeta(score);
+              const skills = Array.isArray(cand.habilidades_tecnicas)
+                ? cand.habilidades_tecnicas
+                : [];
+              const panelClass = LIT_PANELS[idx % LIT_PANELS.length];
+
+              return (
+                <article
+                  key={`${cand.name}-${idx}`}
+                  className="taste-card taste-card--interactive flex flex-col justify-between bg-[#ffffff]"
+                >
+                  {/* Top text block (Card title 20px/500 + 16px/24 body in ink, cards.md) */}
+                  <div>
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-[20px] leading-[28px] font-medium text-[#111111] truncate">
+                        {cand.name || 'Candidato sin nombre'}
+                      </h3>
+                      <span
+                        className={`px-2.5 py-1 rounded-[6px] text-[13px] font-medium shrink-0 ${meta.pill}`}
+                      >
+                        {meta.label}
+                      </span>
+                    </div>
+
+                    <p className="text-[16px] leading-[24px] text-[#111111]/85 mt-2">
+                      {cand.experiencia_years ?? 0}{' '}
+                      {cand.experiencia_years === 1
+                        ? 'año de experiencia comprobada'
+                        : 'años de experiencia comprobada'}{' '}
+                      · {skills.length} habilidades técnicas registradas.
+                    </p>
+                  </div>
+
+                  {/* Lit Panel holding the real UI score fragment (cards.md: Two levels, never three) */}
+                  <div
+                    className={`mt-8 rounded-[12px] p-5 ${panelClass} flex flex-col justify-between min-h-[210px]`}
+                  >
+                    {/* UI Fragment inside the lit panel */}
+                    <div className="rounded-[10px] bg-[#ffffff] border border-[#111111]/12 p-4 space-y-4">
+                      <div className="flex items-baseline justify-between">
+                        <span className="text-[13px] font-medium text-[#6b6b6b]">
+                          Match score
+                        </span>
+                        <span className="font-mono text-[32px] leading-none font-medium tracking-[-0.03em] text-[#111111]">
+                          {score.toFixed(1)}%
+                        </span>
+                      </div>
+
+                      {/* Accent appears once per fragment: the score bar */}
+                      <div className="h-2 w-full rounded-full bg-[#f4f4f4] overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all duration-500"
+                          style={{
+                            width: `${Math.min(Math.max(score, 0), 100)}%`,
+                            backgroundColor: meta.barColor,
+                          }}
+                        />
+                      </div>
+
+                      <div className="pt-1 flex flex-wrap gap-1.5">
+                        {skills.length > 0 ? (
+                          skills.map((skill, sIdx) => (
                             <span
                               key={`${skill}-${sIdx}`}
-                              className="px-2 py-0.5 rounded-md text-xs bg-slate-800 text-slate-200 border border-slate-700"
+                              className="px-2.5 py-1 rounded-[6px] bg-[#f4f4f4] text-[#111111] font-mono text-[12px] font-normal"
                             >
                               {skill}
                             </span>
-                          ))}
-                        </div>
-                      </td>
-                      <td className="py-3.5 px-4 text-right whitespace-nowrap">
-                        <span
-                          className={`inline-flex items-center px-3 py-1 rounded-xl text-xs font-bold border ${styles.badge}`}
-                        >
-                          {score.toFixed(1)}%
-                        </span>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                          ))
+                        ) : (
+                          <span className="text-[13px] text-[#6b6b6b]">
+                            Sin habilidades listadas
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
-        </div>
-      )}
+        ) : (
+          /* Structured Table (.rows style with 1px rule closing each row, system.md) */
+          <div className="taste-card bg-[#ffffff] p-0 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-[#111111]/12 bg-[#f4f4f4]/60 text-[13px] font-medium text-[#6b6b6b]">
+                    <th className="py-4 px-6 font-medium">Candidato</th>
+                    <th className="py-4 px-6 font-medium">Experiencia</th>
+                    <th className="py-4 px-6 font-medium">Habilidades técnicas</th>
+                    <th className="py-4 px-6 font-medium text-right">Match score</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#111111]/10 text-[16px]">
+                  {candidates.map((cand, idx) => {
+                    const score = Number(cand.match_score ?? 0);
+                    const skills = Array.isArray(cand.habilidades_tecnicas)
+                      ? cand.habilidades_tecnicas
+                      : [];
+
+                    return (
+                      <tr
+                        key={`${cand.name}-${idx}`}
+                        className="hover:bg-[#f4f4f4]/50 transition-colors"
+                      >
+                        <td className="py-4 px-6 font-medium text-[#111111] whitespace-nowrap">
+                          {cand.name || 'Sin nombre'}
+                        </td>
+                        <td className="py-4 px-6 text-[#111111] whitespace-nowrap font-mono text-[14px]">
+                          {cand.experiencia_years ?? 0}{' '}
+                          {cand.experiencia_years === 1 ? 'año' : 'años'}
+                        </td>
+                        <td className="py-4 px-6">
+                          <div className="flex flex-wrap gap-1.5">
+                            {skills.map((skill, sIdx) => (
+                              <span
+                                key={`${skill}-${sIdx}`}
+                                className="px-2.5 py-0.5 rounded-[6px] bg-[#f4f4f4] text-[#111111] font-mono text-[13px] border border-[#111111]/10"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </td>
+                        <td className="py-4 px-6 text-right whitespace-nowrap">
+                          <span className="inline-flex items-center px-3 py-1 rounded-[8px] font-mono text-[15px] font-medium bg-[#111111] text-[#ffffff]">
+                            {score.toFixed(1)}%
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+      </div>
     </section>
   );
 }
-

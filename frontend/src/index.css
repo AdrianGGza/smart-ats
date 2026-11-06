@@ -2,9 +2,214 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+:root {
+  --p-bg: #ffffff;
+  --p-surface: #f4f4f4;
+  --p-ink: #111111;
+  --p-muted: #6b6b6b;
+  --p-accent: #1a4be0;
+  --p-accent-ink: #ffffff;
+  --p-action: #1a4be0;
+  --p-action-ink: #ffffff;
+  --p-inv-bg: #111111;
+  --p-inv-surface: #1e1e1e;
+  --p-inv-ink: #ffffff;
+  --p-inv-muted: #9a9a9a;
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-text: "Manrope", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.045em;
+  --r-lg: 20px;
+  --r-md: 12px;
+  --r-sm: 8px;
+  --r-btn: 8px;
+  --m-in: 140ms;
+  --m-out: 200ms;
+  --m-press: 90ms;
+  --m-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --gut: 80px;
+  --nav: 72px;
+}
+
+@media (max-width: 639px) {
+  :root {
+    --gut: 24px;
+    --nav: 56px;
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  background-color: var(--p-bg);
+  color: var(--p-ink);
+  font-family: var(--font-text);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Equal left and right content edges (.wrap) */
+.taste-wrap {
+  width: min(100% - 2 * var(--gut), 1280px);
+  margin-inline: auto;
+}
+
+/* Editorial Typography */
+.taste-h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(36px, 4.2vw, 60px);
+  line-height: 1.06;
+  letter-spacing: var(--display-tracking-xl);
+  color: var(--p-ink);
+}
+
+.taste-h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1.1;
+  letter-spacing: var(--display-tracking);
+  color: var(--p-ink);
+}
+
+/* Taste Motion System (Rule 5) */
+.taste-btn-primary {
+  height: 44px;
+  padding-inline: 24px;
+  border-radius: var(--r-btn);
+  background-color: var(--p-action);
+  color: var(--p-action-ink);
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  transition: transform var(--m-out) var(--m-ease), background-color var(--m-out) var(--m-ease);
+}
+
+.taste-btn-primary:hover:not(:disabled) {
+  background-color: #153ec0;
+  transform: translateY(-1px);
+  transition-duration: var(--m-in);
+}
+
+.taste-btn-primary:active:not(:disabled) {
+  transform: translateY(1px) scale(0.985);
+  transition-duration: var(--m-press);
+}
+
+.taste-btn-primary:disabled {
+  background-color: #e6e6e6;
+  color: #8c8c8c;
+  cursor: not-allowed;
+}
+
+.taste-btn-secondary {
+  height: 44px;
+  padding-inline: 24px;
+  border-radius: var(--r-btn);
+  background-color: transparent;
+  color: var(--p-ink);
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(17, 17, 17, 0.16);
+  transition: transform var(--m-out) var(--m-ease), background-color var(--m-out) var(--m-ease), border-color var(--m-out) var(--m-ease);
+}
+
+.taste-btn-secondary:hover:not(:disabled) {
+  background-color: rgba(17, 17, 17, 0.04);
+  border-color: rgba(17, 17, 17, 0.32);
+  transform: translateY(-1px);
+  transition-duration: var(--m-in);
+}
+
+.taste-btn-secondary:active:not(:disabled) {
+  transform: translateY(1px) scale(0.985);
+  transition-duration: var(--m-press);
+}
+
+/* Arrow inside button steps 3px right on hover */
+.taste-btn-primary .m-arrow,
+.taste-btn-secondary .m-arrow {
+  transition: transform var(--m-out) var(--m-ease);
+}
+.taste-btn-primary:hover:not(:disabled) .m-arrow,
+.taste-btn-secondary:hover:not(:disabled) .m-arrow {
+  transform: translateX(3px);
+  transition-duration: var(--m-in);
+}
+
+/* Card lift 2px on hover (Rule 5) */
+.taste-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  transition: transform 180ms var(--m-ease), border-color 140ms var(--m-ease), box-shadow 180ms var(--m-ease);
+}
+
+@media (max-width: 639px) {
+  .taste-card {
+    padding: 24px;
+    border-radius: 18px;
+  }
+}
+
+.taste-card--interactive:hover {
+  transform: translateY(-2px);
+  border-color: rgba(17, 17, 17, 0.24);
+  box-shadow: 0 12px 24px -8px rgba(17, 17, 17, 0.08);
+}
+
+/* Nav link drawn underline */
+.taste-nav-link {
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--p-ink);
+  padding-block: 4px;
+}
+
+.taste-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--p-ink);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--m-out) var(--m-ease);
+}
+
+.taste-nav-link:hover::after,
+.taste-nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+  transition-duration: var(--m-in);
+}
+
+/* Lit panel grounds for cards (cards.md: sand, sky, sage) */
+.taste-panel-sand {
+  background: radial-gradient(circle at 80% 20%, #e9e0d2 0%, #d9ccb7 100%);
+}
+.taste-panel-sky {
+  background: radial-gradient(circle at 20% 20%, #d6e0e9 0%, #c6d3df 100%);
+}
+.taste-panel-sage {
+  background: radial-gradient(circle at 75% 25%, #dce3d6 0%, #cdd6c6 100%);
+}

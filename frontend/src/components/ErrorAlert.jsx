@@ -1,21 +1,16 @@
-import { AlertTriangle, X } from 'lucide-react';
-
 export default function ErrorAlert({ message, onClose }) {
   if (!message) return null;
 
   return (
     <div
       role="alert"
-      className="rounded-xl bg-rose-950/50 border border-rose-500/40 p-4 text-rose-200 shadow-lg shadow-rose-950/20 flex items-start gap-3 animate-fadeIn"
+      className="rounded-[12px] bg-[#fff5f5] border border-[#b91c1c]/25 p-4 text-[#111111] flex items-start justify-between gap-4"
     >
-      <div className="p-1.5 rounded-lg bg-rose-500/20 text-rose-400 shrink-0 mt-0.5">
-        <AlertTriangle className="w-5 h-5" />
-      </div>
-      <div className="flex-1 min-w-0">
-        <h3 className="text-sm font-semibold text-rose-300">
-          Error al procesar la solicitud
-        </h3>
-        <p className="text-xs text-rose-200/90 mt-1 break-words font-mono bg-rose-950/60 p-2 rounded border border-rose-800/50">
+      <div className="space-y-1 min-w-0">
+        <p className="text-[13px] font-medium text-[#b91c1c]">
+          Respuesta del servidor (Error de solicitud)
+        </p>
+        <p className="font-mono text-[13px] text-[#111111] break-words">
           {message}
         </p>
       </div>
@@ -23,13 +18,11 @@ export default function ErrorAlert({ message, onClose }) {
         <button
           type="button"
           onClick={onClose}
-          className="text-rose-400 hover:text-rose-200 p-1 rounded-lg hover:bg-rose-500/20 transition-colors"
-          aria-label="Cerrar alerta de error"
+          className="text-[13px] font-medium text-[#6b6b6b] hover:text-[#111111] px-2 py-1 rounded-[6px] border border-transparent hover:border-[#111111]/15 transition-colors shrink-0"
         >
-          <X className="w-4 h-4" />
+          Cerrar
         </button>
       )}
     </div>
   );
 }
-
