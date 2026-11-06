@@ -10,7 +10,7 @@ router = APIRouter()
 @router.post('/analizar-cv')
 async def analizar_cv(candidato : PeticionCV):
     try:
-        resultado = await procesar_cv_gemini(candidato.texto_cv)
+        resultado = await procesar_cv_gemini(candidato.texto_cv, candidato.criterios_vacante)
         guardar_candidato(resultado)
         return resultado
     except Exception as e:
@@ -28,7 +28,7 @@ async def procesar_batch(file : UploadFile):
     resultados_batch = []
 
     for f in finalistas:
-        texto = f'Nombre del candidato:{f['nombre']}\nCV: {f['texto_cv']}'
+        texto = f"Nombre del candidato:{f['nombre']}\nCV: {f['texto_cv']}"
         resultado = await procesar_cv_gemini(texto)
         resultado.name = f['nombre']
         guardar_candidato(resultado)
