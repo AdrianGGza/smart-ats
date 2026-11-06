@@ -85,8 +85,8 @@ export default function BatchUploadDropzone({ onBatchProcessed }) {
   const handleDownloadSampleCSV = (e) => {
     e.stopPropagation();
     const a = document.createElement('a');
-    a.href = '/candidatos_prueba_masiva.csv';
-    a.download = 'candidatos_prueba_masiva.csv';
+    a.href = '/candidatos.csv';
+    a.download = 'candidatos.csv';
     a.click();
   };
 
