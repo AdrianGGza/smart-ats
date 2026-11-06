@@ -55,9 +55,9 @@ function createHarvardResumePDF() {
   drawText('F3', 10, left, y, 'Bachelor of Arts in Computer Science, Secondary in Economics');
   drawText('F1', 10, right - 55, y, 'May 2023');
   y -= 12;
-  drawText('F1', 9.5, left + 10, y, '•  Cumulative GPA: 3.88 / 4.00 (Magna Cum Laude, Dean\'s List all semesters)');
+  drawText('F1', 9.5, left + 10, y, '- Cumulative GPA: 3.88 / 4.00 (Magna Cum Laude, Dean\'s List all semesters)');
   y -= 11;
-  drawText('F1', 9.5, left + 10, y, '•  Relevant Coursework: Systems Programming, Algorithms & Data Structures, Machine Learning, Distributed Systems');
+  drawText('F1', 9.5, left + 10, y, '- Relevant Coursework: Systems Programming, Algorithms & Data Structures, Machine Learning, Distributed Systems');
   y -= 16;
 
   // 3. TECHNICAL SKILLS
@@ -82,13 +82,13 @@ function createHarvardResumePDF() {
   drawText('F3', 10, left, y, 'Software Engineer - AI & Backend Infrastructure');
   drawText('F3', 10, right - 65, y, 'Boston, MA');
   y -= 12;
-  drawText('F1', 9.5, left + 10, y, '•  Architected and deployed asynchronous REST APIs using FastAPI and Python, handling 150,000+ daily queries with sub-50ms latency.');
+  drawText('F1', 9.5, left + 10, y, '- Architected and deployed asynchronous REST APIs using FastAPI and Python, handling 150,000+ daily queries with sub-50ms latency.');
   y -= 11;
-  drawText('F1', 9.5, left + 10, y, '•  Integrated LLM extraction pipelines using Google Gemini API and Pydantic schemas, reaching 99.4% data validation accuracy.');
+  drawText('F1', 9.5, left + 10, y, '- Integrated LLM extraction pipelines using Google Gemini API and Pydantic schemas, reaching 99.4% data validation accuracy.');
   y -= 11;
-  drawText('F1', 9.5, left + 10, y, '•  Engineered high-speed dataframes with Polars for batch CSV parsing in RAM, decreasing execution times by 68%.');
+  drawText('F1', 9.5, left + 10, y, '- Engineered high-speed dataframes with Polars for batch CSV parsing in RAM, decreasing execution times by 68%.');
   y -= 11;
-  drawText('F1', 9.5, left + 10, y, '•  Implemented automated CI/CD workflows and containerized services using Docker, maintaining 94% test suite coverage.');
+  drawText('F1', 9.5, left + 10, y, '- Implemented automated CI/CD workflows and containerized services using Docker, maintaining 94% test suite coverage.');
   y -= 14;
 
   // Job 2
@@ -98,11 +98,11 @@ function createHarvardResumePDF() {
   drawText('F3', 10, left, y, 'Software Engineering Intern - Platform Team');
   drawText('F3', 10, right - 75, y, 'New York, NY');
   y -= 12;
-  drawText('F1', 9.5, left + 10, y, '•  Designed responsive dashboard interfaces in React and TypeScript for recruitment analytics, improving workflow speed by 25%.');
+  drawText('F1', 9.5, left + 10, y, '- Designed responsive dashboard interfaces in React and TypeScript for recruitment analytics, improving workflow speed by 25%.');
   y -= 11;
-  drawText('F1', 9.5, left + 10, y, '•  Optimized complex PostgreSQL queries and Supabase indexes, decreasing median search query latency from 420ms to 85ms.');
+  drawText('F1', 9.5, left + 10, y, '- Optimized complex PostgreSQL queries and Supabase indexes, decreasing median search query latency from 420ms to 85ms.');
   y -= 11;
-  drawText('F1', 9.5, left + 10, y, '•  Participated in Agile engineering sprints, performing rigorous code reviews and implementing unit tests.');
+  drawText('F1', 9.5, left + 10, y, '- Participated in Agile engineering sprints, performing rigorous code reviews and implementing unit tests.');
   y -= 16;
 
   // 5. PROJECTS
@@ -112,16 +112,16 @@ function createHarvardResumePDF() {
   drawText('F2', 10, left, y, 'SMART ATS & RESUME PARSER');
   drawText('F3', 9.5, right - 220, y, 'Python, FastAPI, Polars, React, Gemini SDK');
   y -= 12;
-  drawText('F1', 9.5, left + 10, y, '•  Engineered an applicant tracking platform filtering candidates by experience thresholds and calculating match scores.');
+  drawText('F1', 9.5, left + 10, y, '- Engineered an applicant tracking platform filtering candidates by experience thresholds and calculating match scores.');
   y -= 11;
-  drawText('F1', 9.5, left + 10, y, '•  Built an intuitive user interface with drag-and-drop file upload and instant structured evaluation breakdown.');
+  drawText('F1', 9.5, left + 10, y, '- Built an intuitive user interface with drag-and-drop file upload and instant structured evaluation breakdown.');
   y -= 14;
 
   // Project 2
   drawText('F2', 10, left, y, 'SEMANTIC EMBEDDING SEARCH ENGINE');
   drawText('F3', 9.5, right - 210, y, 'Python, PyTorch, Supabase pgvector, Docker');
   y -= 12;
-  drawText('F1', 9.5, left + 10, y, '•  Developed a high-throughput search system vectorizing and indexing 50,000+ candidate profiles with cosine-similarity matching.');
+  drawText('F1', 9.5, left + 10, y, '- Developed a high-throughput search system vectorizing and indexing 50,000+ candidate profiles with cosine-similarity matching.');
   y -= 16;
 
   // 6. LEADERSHIP & ACTIVITIES
@@ -132,7 +132,7 @@ function createHarvardResumePDF() {
   drawText('F3', 10, left, y, 'Vice President of Technical Workshops');
   drawText('F3', 10, right - 85, y, 'Cambridge, MA');
   y -= 12;
-  drawText('F1', 9.5, left + 10, y, '•  Organized and instructed 12 technical bootcamps on full-stack web architectures and cloud deployment for 200+ students.');
+  drawText('F1', 9.5, left + 10, y, '- Organized and instructed 12 technical bootcamps on full-stack web architectures and cloud deployment for 200+ students.');
 
   // Combine stream
   const streamData = contentStreams.join('\n');
