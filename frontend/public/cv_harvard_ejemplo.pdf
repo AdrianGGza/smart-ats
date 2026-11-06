@@ -1,0 +1,90 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R >> >> /Contents 7 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Italic >>
+endobj
+7 0 obj
+<< /Length 4262 >>
+stream
+BT /F2 17 Tf 254.575 752 Td (ALEX MORGAN) Tj ET
+BT /F1 9.5 Tf 46.839999999999975 737 Td (Cambridge, MA  |  \(555\) 382-9104  |  alex.morgan@alumni.harvard.edu  |  linkedin.com/in/alexmorgan  |  github.com/alexmorgan) Tj ET
+BT /F2 11 Tf 40 719 Td (EDUCATION) Tj ET
+0.75 w 0 0 0 RG 40 716 m 572 716 l S
+BT /F2 10.5 Tf 40 703 Td (HARVARD UNIVERSITY) Tj ET
+BT /F3 10 Tf 487 703 Td (Cambridge, MA) Tj ET
+BT /F3 10 Tf 40 691 Td (Bachelor of Arts in Computer Science, Secondary in Economics) Tj ET
+BT /F1 10 Tf 517 691 Td (May 2023) Tj ET
+BT /F1 9.5 Tf 50 679 Td (•  Cumulative GPA: 3.88 / 4.00 \(Magna Cum Laude, Dean's List all semesters\)) Tj ET
+BT /F1 9.5 Tf 50 668 Td (•  Relevant Coursework: Systems Programming, Algorithms & Data Structures, Machine Learning, Distributed Systems) Tj ET
+BT /F2 11 Tf 40 652 Td (TECHNICAL SKILLS) Tj ET
+0.75 w 0 0 0 RG 40 649 m 572 649 l S
+BT /F2 9.5 Tf 40 636 Td (Languages:) Tj ET
+BT /F1 9.5 Tf 105 636 Td (Python, JavaScript \(ES6+\), TypeScript, SQL \(PostgreSQL\), C++, HTML5/CSS3) Tj ET
+BT /F2 9.5 Tf 40 624 Td (Frameworks:) Tj ET
+BT /F1 9.5 Tf 105 624 Td (FastAPI, React, Node.js, Polars, Pandas, Pydantic, PyTorch, TailwindCSS) Tj ET
+BT /F2 9.5 Tf 40 612 Td (Tools & Cloud:) Tj ET
+BT /F1 9.5 Tf 105 612 Td (Git, GitHub Actions \(CI/CD\), Docker, Supabase, AWS \(S3, EC2\), Linux, Postman) Tj ET
+BT /F2 11 Tf 40 596 Td (PROFESSIONAL EXPERIENCE) Tj ET
+0.75 w 0 0 0 RG 40 593 m 572 593 l S
+BT /F2 10.5 Tf 40 580 Td (NEXUS DATA SYSTEMS) Tj ET
+BT /F3 10 Tf 457 580 Td (June 2023 - Present) Tj ET
+BT /F3 10 Tf 40 568 Td (Software Engineer - AI & Backend Infrastructure) Tj ET
+BT /F3 10 Tf 507 568 Td (Boston, MA) Tj ET
+BT /F1 9.5 Tf 50 556 Td (•  Architected and deployed asynchronous REST APIs using FastAPI and Python, handling 150,000+ daily queries with sub-50ms latency.) Tj ET
+BT /F1 9.5 Tf 50 545 Td (•  Integrated LLM extraction pipelines using Google Gemini API and Pydantic schemas, reaching 99.4% data validation accuracy.) Tj ET
+BT /F1 9.5 Tf 50 534 Td (•  Engineered high-speed dataframes with Polars for batch CSV parsing in RAM, decreasing execution times by 68%.) Tj ET
+BT /F1 9.5 Tf 50 523 Td (•  Implemented automated CI/CD workflows and containerized services using Docker, maintaining 94% test suite coverage.) Tj ET
+BT /F2 10.5 Tf 40 509 Td (VERTEX ANALYTICS) Tj ET
+BT /F3 10 Tf 437 509 Td (June 2022 - August 2022) Tj ET
+BT /F3 10 Tf 40 497 Td (Software Engineering Intern - Platform Team) Tj ET
+BT /F3 10 Tf 497 497 Td (New York, NY) Tj ET
+BT /F1 9.5 Tf 50 485 Td (•  Designed responsive dashboard interfaces in React and TypeScript for recruitment analytics, improving workflow speed by 25%.) Tj ET
+BT /F1 9.5 Tf 50 474 Td (•  Optimized complex PostgreSQL queries and Supabase indexes, decreasing median search query latency from 420ms to 85ms.) Tj ET
+BT /F1 9.5 Tf 50 463 Td (•  Participated in Agile engineering sprints, performing rigorous code reviews and implementing unit tests.) Tj ET
+BT /F2 11 Tf 40 447 Td (PROJECTS) Tj ET
+0.75 w 0 0 0 RG 40 444 m 572 444 l S
+BT /F2 10 Tf 40 431 Td (SMART ATS & RESUME PARSER) Tj ET
+BT /F3 9.5 Tf 352 431 Td (Python, FastAPI, Polars, React, Gemini SDK) Tj ET
+BT /F1 9.5 Tf 50 419 Td (•  Engineered an applicant tracking platform filtering candidates by experience thresholds and calculating match scores.) Tj ET
+BT /F1 9.5 Tf 50 408 Td (•  Built an intuitive user interface with drag-and-drop file upload and instant structured evaluation breakdown.) Tj ET
+BT /F2 10 Tf 40 394 Td (SEMANTIC EMBEDDING SEARCH ENGINE) Tj ET
+BT /F3 9.5 Tf 362 394 Td (Python, PyTorch, Supabase pgvector, Docker) Tj ET
+BT /F1 9.5 Tf 50 382 Td (•  Developed a high-throughput search system vectorizing and indexing 50,000+ candidate profiles with cosine-similarity matching.) Tj ET
+BT /F2 11 Tf 40 366 Td (LEADERSHIP & ACTIVITIES) Tj ET
+0.75 w 0 0 0 RG 40 363 m 572 363 l S
+BT /F2 10 Tf 40 350 Td (HARVARD COMPUTER SOCIETY) Tj ET
+BT /F3 9.5 Tf 437 350 Td (September 2021 - May 2023) Tj ET
+BT /F3 10 Tf 40 338 Td (Vice President of Technical Workshops) Tj ET
+BT /F3 10 Tf 487 338 Td (Cambridge, MA) Tj ET
+BT /F1 9.5 Tf 50 326 Td (•  Organized and instructed 12 technical bootcamps on full-stack web architectures and cloud deployment for 200+ students.) Tj ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+0000000333 00000 n 
+0000000404 00000 n 
+0000000477 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+4791
+%%EOF

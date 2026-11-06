@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alex Morgan - Harvard Resume Format</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 0.5in 0.6in;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Times New Roman", Times, Georgia, serif;
+      font-size: 10.5pt;
+      line-height: 1.3;
+      color: #000000;
+      background: #ffffff;
+      padding: 0.5in 0.6in;
+    }
+    /* Centered Header */
+    .header {
+      text-align: center;
+      margin-bottom: 12pt;
+    }
+    .header h1 {
+      font-size: 18pt;
+      font-weight: bold;
+      letter-spacing: 0.5pt;
+      text-transform: uppercase;
+      margin-bottom: 4pt;
+    }
+    .contact-info {
+      font-size: 9.5pt;
+      color: #111111;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6pt;
+    }
+    .contact-info span:not(:last-child)::after {
+      content: "•";
+      margin-left: 6pt;
+      color: #555555;
+    }
+
+    /* Section Headings */
+    .section-title {
+      font-size: 11pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5pt;
+      border-bottom: 1px solid #000000;
+      padding-bottom: 1.5pt;
+      margin-top: 10pt;
+      margin-bottom: 5pt;
+    }
+
+    /* Entry Layout */
+    .entry {
+      margin-bottom: 7pt;
+    }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 10.5pt;
+    }
+    .entry-header .left-title {
+      font-weight: bold;
+    }
+    .entry-header .right-date {
+      font-style: italic;
+      text-align: right;
+      font-size: 10pt;
+    }
+    .entry-subheader {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 10pt;
+      margin-bottom: 2.5pt;
+    }
+    .entry-subheader .role-title {
+      font-style: italic;
+    }
+    .entry-subheader .location {
+      font-style: italic;
+      color: #333333;
+    }
+
+    /* Bullet Points */
+    ul {
+      margin-left: 16pt;
+      margin-top: 2pt;
+    }
+    li {
+      margin-bottom: 2pt;
+      font-size: 10pt;
+      text-align: justify;
+    }
+
+    /* Skills section */
+    .skills-line {
+      font-size: 10pt;
+      margin-bottom: 3pt;
+      line-height: 1.35;
+    }
+    .skills-line strong {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>ALEX MORGAN</h1>
+    <div class="contact-info">
+      <span>Cambridge, MA</span>
+      <span>(555) 382-9104</span>
+      <span>alex.morgan@alumni.harvard.edu</span>
+      <span>linkedin.com/in/alexmorgan-dev</span>
+      <span>github.com/alexmorgan-ai</span>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section-title">Education</div>
+  <div class="entry">
+    <div class="entry-header">
+      <span class="left-title">HARVARD UNIVERSITY</span>
+      <span class="right-date">Cambridge, MA</span>
+    </div>
+    <div class="entry-subheader">
+      <span class="role-title">Bachelor of Arts in Computer Science and Economics, Minor in Statistics</span>
+      <span class="location">May 2023</span>
+    </div>
+    <ul>
+      <li><strong>Cumulative GPA:</strong> 3.88 / 4.00 (Magna Cum Laude, Dean's List all semesters).</li>
+      <li><strong>Relevant Coursework:</strong> Systems Programming, Data Structures & Algorithms, Machine Learning (CS 181), Database Systems, Distributed Systems, Software Engineering.</li>
+    </ul>
+  </div>
+
+  <!-- TECHNICAL SKILLS -->
+  <div class="section-title">Technical Skills</div>
+  <div class="skills-line">
+    <strong>Languages:</strong> Python, JavaScript (ES6+), TypeScript, SQL (PostgreSQL), C/C++, HTML5/CSS3.
+  </div>
+  <div class="skills-line">
+    <strong>Frameworks & Libraries:</strong> FastAPI, React, Node.js, Polars, Pandas, Pydantic, PyTorch, TailwindCSS.
+  </div>
+  <div class="skills-line">
+    <strong>Developer Tools & Cloud:</strong> Git, GitHub Actions (CI/CD), Docker, AWS (S3, EC2), Supabase, Linux/Unix, Postman.
+  </div>
+
+  <!-- PROFESSIONAL EXPERIENCE -->
+  <div class="section-title">Professional Experience</div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <span class="left-title">NEXUS DATA SYSTEMS</span>
+      <span class="right-date">June 2023 – Present</span>
+    </div>
+    <div class="entry-subheader">
+      <span class="role-title">Software Engineer – AI & Backend Systems</span>
+      <span class="location">Boston, MA</span>
+    </div>
+    <ul>
+      <li>Architected and deployed asynchronous REST APIs using <strong>FastAPI</strong> and <strong>Python</strong>, serving over 150,000 daily active requests with sub-50ms latency.</li>
+      <li>Integrated LLM parsing pipelines utilizing <strong>Google Gemini API</strong> and strict schema validation with <strong>Pydantic</strong>, achieving a 99.4% data extraction accuracy rate on unstructured documents.</li>
+      <li>Engineered in-memory analytical pipelines with <strong>Polars</strong>, reducing batch CSV resume processing times by 68% compared to traditional Pandas workflows.</li>
+      <li>Configured automated testing and deployment pipelines using GitHub Actions and Docker, maintaining a 94% test coverage score across microservices.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <span class="left-title">VERTEX ANALYTICS</span>
+      <span class="right-date">June 2022 – August 2022</span>
+    </div>
+    <div class="entry-subheader">
+      <span class="role-title">Software Engineering Intern – Platform Team</span>
+      <span class="location">New York, NY</span>
+    </div>
+    <ul>
+      <li>Designed and implemented responsive dashboard modules in <strong>React</strong> and <strong>TypeScript</strong> for an applicant tracking system, enhancing recruiting workflow efficiency by 25%.</li>
+      <li>Optimized PostgreSQL queries and database schemas on <strong>Supabase</strong>, decreasing median search query execution times from 420ms to 85ms.</li>
+      <li>Collaborated within an Agile cross-functional team of 8 engineers and product managers through two-week sprints.</li>
+    </ul>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section-title">Projects</div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <span class="left-title">SMART RECRUITMENT ATS & CV PARSER</span>
+      <span class="right-date">Python, FastAPI, Polars, React, Gemini SDK</span>
+    </div>
+    <ul>
+      <li>Built an end-to-end recruitment platform that filters candidate cohorts based on experience thresholds and calculates compatibility match scores using AI embeddings.</li>
+      <li>Designed a clean, modern user interface in React with drag-and-drop file upload capabilities and real-time structured schema visualization.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <span class="left-title">HIGH-THROUGHPUT RESUME EMBEDDING SEARCH</span>
+      <span class="right-date">Python, PyTorch, Supabase pgvector, Docker</span>
+    </div>
+    <ul>
+      <li>Created a semantic search engine capable of vectorizing and indexing over 50,000 professional profiles with instant cosine-similarity ranking.</li>
+    </ul>
+  </div>
+
+  <!-- LEADERSHIP & CERTIFICATIONS -->
+  <div class="section-title">Leadership & Activities</div>
+  <div class="entry">
+    <div class="entry-header">
+      <span class="left-title">HARVARD COMPUTER SOCIETY</span>
+      <span class="right-date">September 2021 – May 2023</span>
+    </div>
+    <div class="entry-subheader">
+      <span class="role-title">Vice President of Technical Workshops</span>
+      <span class="location">Cambridge, MA</span>
+    </div>
+    <ul>
+      <li>Organized and mentored 12 technical bootcamps on full-stack web development and cloud technologies for over 200 undergraduate students.</li>
+    </ul>
+  </div>
+
+</body>
+</html>
