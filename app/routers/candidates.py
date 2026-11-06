@@ -1,9 +1,10 @@
-from fastapi import APIRouter, HTTPException, UploadFile, File
+from fastapi import APIRouter, HTTPException, UploadFile, File, Form
 from app.models.schemas import PeticionCV
 from app.services.ia_services import procesar_cv_gemini
 from app.services.db_service import guardar_candidato
 import io
 import polars as pl
+from PyPDF2 import  PdfReader
 
 router = APIRouter()
 
@@ -35,3 +36,22 @@ async def procesar_batch(file : UploadFile):
         resultados_batch.append(resultado)
 
     return resultados_batch
+
+@router.post('/analizar-pdf')
+async def procesar_pdf(file : UploadFile, criterios_vacante : str | None = Form(default=None))  :
+    contenido_bytes = await file.read() 
+    pdf_virtual = io.BytesIO(contenido_bytes)
+    texto_extraido = ''
+    lector = PdfReader(pdf_virtual)
+
+    for pagina in lector.pages:
+        texto_extraido+=pagina.extract_text() + "\n"
+
+    try:
+        resultado = await procesar_cv_gemini(texto_extraido,criterios_vacante)
+        guardar_candidato(resultado)
+        return resultado
+    except Exception as e:
+        raise HTTPException(status_code=500,detail=str(e))
+
+    
