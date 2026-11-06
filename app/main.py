@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File
 from app.routers import candidates
 
 app =FastAPI(title= "Smart ATS API")
