@@ -1,34 +1,37 @@
 /**
- * Envía el texto plano de un CV y los criterios de la vacante al endpoint POST /analizar-cv
- * @param {string|Object} textoCvOrPayload - Contenido en texto plano del CV u objeto con { texto_cv, criterios_vacante }
- * @param {string|null} [criteriosVacante=null] - Criterios opcionales de la vacante deseada
+ * Sube un archivo PDF y los criterios de la vacante al endpoint POST /analizar-pdf usando FormData
+ * @param {File|Object} fileOrPayload - Archivo PDF seleccionado por el usuario u objeto { file, criterios_vacante }
+ * @param {string|null} [criteriosVacante=''] - Criterios opcionales de la vacante deseada
  * @returns {Promise<Object>} Resultado del análisis validado por el backend
  */
-export async function analizarCV(textoCvOrPayload, criteriosVacante = null) {
-  let texto_cv = '';
-  let criterios_vacante = null;
+export async function analizarPDF(fileOrPayload, criteriosVacante = '') {
+  const formData = new FormData();
 
-  if (typeof textoCvOrPayload === 'object' && textoCvOrPayload !== null) {
-    texto_cv = textoCvOrPayload.texto_cv ?? '';
-    criterios_vacante = textoCvOrPayload.criterios_vacante ?? null;
-  } else {
-    texto_cv = textoCvOrPayload;
-    criterios_vacante = criteriosVacante;
+  let file = null;
+  let criterios = '';
+
+  if (fileOrPayload instanceof File || fileOrPayload instanceof Blob) {
+    file = fileOrPayload;
+    criterios = criteriosVacante || '';
+  } else if (fileOrPayload && typeof fileOrPayload === 'object') {
+    file = fileOrPayload.file;
+    criterios = fileOrPayload.criterios_vacante || '';
   }
 
-  const payload = {
-    criterios_vacante: (typeof criterios_vacante === 'string' && criterios_vacante.trim() !== '')
-      ? criterios_vacante.trim()
-      : (criterios_vacante || null),
-    texto_cv: texto_cv,
-  };
+  if (file) {
+    formData.append('file', file);
+  }
 
-  const response = await fetch('https://smart-ats-0c5l.onrender.com/analizar-cv', {
+  if (criterios && typeof criterios === 'string' && criterios.trim() !== '') {
+    formData.append('criterios_vacante', criterios.trim());
+  } else {
+    formData.append('criterios_vacante', '');
+  }
+
+  // Sin header manual de Content-Type: el navegador asigna multipart/form-data y el boundary automáticamente
+  const response = await fetch('https://smart-ats-0c5l.onrender.com/analizar-pdf', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
+    body: formData,
   });
 
   if (!response.ok) {
@@ -48,6 +51,9 @@ export async function analizarCV(textoCvOrPayload, criteriosVacante = null) {
 
   return await response.json();
 }
+
+// Alias para compatibilidad con llamadas existentes
+export const analizarCV = analizarPDF;
 
 /**
  * Sube un archivo CSV al endpoint POST /procesar-batch usando FormData
@@ -80,4 +86,3 @@ export async function procesarBatchCSV(csvFile) {
 
   return await response.json();
 }
-

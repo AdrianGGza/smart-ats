@@ -78,7 +78,7 @@ export default function App() {
 
               <div className="lg:col-span-5 space-y-5">
                 <p className="text-[18px] leading-[1.55] text-[#111111]">
-                  Extrae habilidades técnicas y calcula el <code className="font-mono text-[15px]">match_score</code> de 0 a 100 desde texto plano o lotes CSV en un solo paso.
+                  Extrae habilidades técnicas y calcula el <code className="font-mono text-[15px]">match_score</code> de 0 a 100 desde documentos PDF o lotes CSV en un solo paso.
                 </p>
 
                 <div className="flex flex-wrap items-center gap-3">
@@ -89,7 +89,7 @@ export default function App() {
                       activeTab === 'single' ? 'taste-btn-primary' : 'taste-btn-secondary'
                     }
                   >
-                    <span>Evaluar CV individual</span>
+                    <span>Evaluar CV en PDF</span>
                   </button>
                   <button
                     type="button"
@@ -119,7 +119,7 @@ export default function App() {
                     <span className="text-[#6b6b6b]">·</span>
                     <span className="font-mono text-[12px] text-[#6b6b6b]">
                       {activeTab === 'single'
-                        ? 'POST https://smart-ats-0c5l.onrender.com/analizar-cv'
+                        ? 'POST https://smart-ats-0c5l.onrender.com/analizar-pdf'
                         : 'POST https://smart-ats-0c5l.onrender.com/procesar-batch'}
                     </span>
                   </div>
@@ -141,7 +141,7 @@ export default function App() {
                           : 'text-[#6b6b6b] hover:text-[#111111]'
                       }`}
                     >
-                      1. Texto plano (/analizar-cv)
+                      1. Documento PDF (/analizar-pdf)
                     </button>
                     <button
                       type="button"
