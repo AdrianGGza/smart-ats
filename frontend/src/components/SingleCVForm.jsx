@@ -41,7 +41,7 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
     } catch (err) {
       setError(
         err.message ||
-          'No se pudo conectar con https://smart-ats-0c5l.onrender.com/analizar-pdf. Verifica que el backend esté activo.'
+          'No se pudo completar el análisis en este momento. Por favor intenta nuevamente.'
       );
     } finally {
       setIsLoading(false);
@@ -59,15 +59,10 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-[#111111]/10 pb-4">
-        <div>
-          <h3 className="text-[20px] font-medium text-[#111111] tracking-[-0.02em]">
-            Evaluación de CVs en formato PDF
-          </h3>
-          <p className="text-[16px] text-[#6b6b6b] mt-1">
-            Envía uno o varios documentos al endpoint <code className="font-mono text-[14px] text-[#111111]">POST /analizar-pdf</code> con <code className="font-mono text-[14px] text-[#111111]">multipart/form-data</code>.
-          </p>
-        </div>
+      <div className="border-b border-[#111111]/10 pb-4">
+        <h3 className="text-[20px] font-medium text-[#111111] tracking-[-0.02em]">
+          Evaluación de CVs en formato PDF
+        </h3>
       </div>
 
       <div>
@@ -143,7 +138,7 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
             <div className="space-y-3" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between gap-3 border-b border-[#111111]/10 pb-2">
                 <span className="text-[13px] font-medium text-[#1a4be0]">
-                  {selectedFiles.length} {selectedFiles.length === 1 ? 'documento PDF listo' : 'documentos PDF listos para procesar'}
+                  {selectedFiles.length} {selectedFiles.length === 1 ? 'documento PDF seleccionado' : 'documentos PDF seleccionados'}
                 </span>
                 <button
                   type="button"
@@ -175,49 +170,43 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
 
       <ErrorAlert message={error} onClose={() => setError(null)} />
 
-      <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-        <p className="text-[14px] text-[#6b6b6b]">
-          Extracción y evaluación con PyPDF2 y Gemini hacia Supabase.
-        </p>
-
-        <div className="flex items-center gap-3 w-full sm:w-auto">
-          {(selectedFiles.length > 0 || criterios_vacante) && (
-            <button
-              type="button"
-              onClick={clearForm}
-              disabled={isLoading}
-              className="taste-btn-secondary flex-1 sm:flex-initial"
-            >
-              Limpiar
-            </button>
-          )}
-
+      <div className="flex items-center justify-end gap-3 pt-2">
+        {(selectedFiles.length > 0 || criterios_vacante) && (
           <button
-            type="submit"
-            disabled={isLoading || selectedFiles.length === 0}
-            className="taste-btn-primary flex-1 sm:flex-initial"
+            type="button"
+            onClick={clearForm}
+            disabled={isLoading}
+            className="taste-btn-secondary flex-1 sm:flex-initial"
           >
-            {isLoading ? (
-              <>
-                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                <span>Extrayendo y evaluando PDFs...</span>
-              </>
-            ) : (
-              <>
-                <span>Evaluar {selectedFiles.length > 1 ? `${selectedFiles.length} PDFs` : 'PDF'}</span>
-                <svg
-                  className="m-arrow w-4 h-4"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.75"
-                >
-                  <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </>
-            )}
+            Limpiar
           </button>
-        </div>
+        )}
+
+        <button
+          type="submit"
+          disabled={isLoading || selectedFiles.length === 0}
+          className="taste-btn-primary flex-1 sm:flex-initial"
+        >
+          {isLoading ? (
+            <>
+              <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <span>Evaluando...</span>
+            </>
+          ) : (
+            <>
+              <span>Evaluar {selectedFiles.length > 1 ? `${selectedFiles.length} PDFs` : 'PDF'}</span>
+              <svg
+                className="m-arrow w-4 h-4"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.75"
+              >
+                <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </>
+          )}
+        </button>
       </div>
     </form>
   );

@@ -33,16 +33,13 @@ export default function CandidateResults({ candidates, onClear }) {
   return (
     <section
       id="resultados"
-      className="py-24 bg-[#f4f4f4] border-t border-[#111111]/10"
+      className="py-20 bg-[#f4f4f4] border-t border-[#111111]/10"
     >
-      <div className="taste-wrap space-y-12">
+      <div className="taste-wrap space-y-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div className="space-y-3 max-w-[62ch]">
+          <div className="space-y-2 max-w-[62ch]">
             <h2 className="taste-h2">
-              Candidatos evaluados y puntaje de compatibilidad.{' '}
-              <span className="text-[#6b6b6b]">
-                Ordenados por ingreso desde la API en la nube.
-              </span>
+              Candidatos evaluados
             </h2>
           </div>
 
@@ -78,7 +75,7 @@ export default function CandidateResults({ candidates, onClear }) {
                         : 'text-[#6b6b6b] hover:text-[#111111]'
                     }`}
                   >
-                    Tabla estructurada
+                    Tabla
                   </button>
                 </div>
 
@@ -97,16 +94,11 @@ export default function CandidateResults({ candidates, onClear }) {
         {!hasCandidates ? (
           <div className="taste-card bg-[#ffffff] flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div className="space-y-2 max-w-[58ch]">
-              <p className="text-[13px] font-medium text-[#6b6b6b]">
-                Bandeja de evaluación vacía
-              </p>
               <h3 className="text-[20px] font-medium text-[#111111]">
-                Aún no se han procesado currículums en esta sesión
+                Aún no se han evaluado candidatos
               </h3>
               <p className="text-[16px] text-[#6b6b6b]">
-                Utiliza el formulario superior para enviar documentos PDF al endpoint{' '}
-                <code className="font-mono text-[14px] text-[#111111]">/analizar-pdf</code> o sube un archivo CSV a{' '}
-                <code className="font-mono text-[14px] text-[#111111]">/procesar-batch</code>.
+                Sube uno o varios currículums en PDF o carga un archivo CSV en el panel superior para ver sus resultados aquí.
               </p>
             </div>
           </div>
@@ -140,9 +132,9 @@ export default function CandidateResults({ candidates, onClear }) {
                     <p className="text-[16px] leading-[24px] text-[#111111]/85 mt-2">
                       {cand.experiencia_years ?? 0}{' '}
                       {cand.experiencia_years === 1
-                        ? 'año de experiencia comprobada'
-                        : 'años de experiencia comprobada'}{' '}
-                      · {skills.length} habilidades técnicas registradas.
+                        ? 'año de experiencia'
+                        : 'años de experiencia'}{' '}
+                      · {skills.length} {skills.length === 1 ? 'habilidad identificada' : 'habilidades identificadas'}
                     </p>
                   </div>
 
@@ -152,7 +144,7 @@ export default function CandidateResults({ candidates, onClear }) {
                     <div className="rounded-[10px] bg-[#ffffff] border border-[#111111]/12 p-4 space-y-4">
                       <div className="flex items-baseline justify-between">
                         <span className="text-[13px] font-medium text-[#6b6b6b]">
-                          Match score
+                          Compatibilidad
                         </span>
                         <span className="font-mono text-[32px] leading-none font-medium tracking-[-0.03em] text-[#111111]">
                           {score.toFixed(1)}%
@@ -199,8 +191,8 @@ export default function CandidateResults({ candidates, onClear }) {
                   <tr className="border-b border-[#111111]/12 bg-[#f4f4f4]/60 text-[13px] font-medium text-[#6b6b6b]">
                     <th className="py-4 px-6 font-medium">Candidato</th>
                     <th className="py-4 px-6 font-medium">Experiencia</th>
-                    <th className="py-4 px-6 font-medium">Habilidades técnicas</th>
-                    <th className="py-4 px-6 font-medium text-right">Match score</th>
+                    <th className="py-4 px-6 font-medium">Habilidades</th>
+                    <th className="py-4 px-6 font-medium text-right">Compatibilidad</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#111111]/10 text-[16px]">

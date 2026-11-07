@@ -34,7 +34,7 @@ export default function Header({ totalEvaluados, activeTab, onSelectTab }) {
             aria-current={activeTab === 'single' ? 'page' : undefined}
             className="taste-nav-link bg-transparent border-0 cursor-pointer"
           >
-            Individual
+            Evaluación PDF
           </button>
           <button
             type="button"
@@ -45,7 +45,7 @@ export default function Header({ totalEvaluados, activeTab, onSelectTab }) {
             aria-current={activeTab === 'batch' ? 'page' : undefined}
             className="taste-nav-link bg-transparent border-0 cursor-pointer"
           >
-            Lotes
+            Carga masiva CSV
           </button>
           <a href="#resultados" className="taste-nav-link no-underline">
             Candidatos
@@ -55,16 +55,9 @@ export default function Header({ totalEvaluados, activeTab, onSelectTab }) {
               </span>
             )}
           </a>
-          <a href="#arquitectura" className="taste-nav-link no-underline">
-            Flujo
-          </a>
         </nav>
 
         <div className="flex items-center gap-4">
-          <span className="hidden lg:inline-flex items-center gap-2 font-mono text-[13px] text-[#6b6b6b]">
-            <span className="w-2 h-2 rounded-full bg-[#111111]" />
-            smart-ats-0c5l.onrender.com
-          </span>
           <a
             href="#workspace"
             onClick={() => onSelectTab('single')}

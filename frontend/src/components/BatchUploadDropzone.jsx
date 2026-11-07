@@ -67,7 +67,7 @@ export default function BatchUploadDropzone({ onBatchProcessed }) {
     } catch (err) {
       setError(
         err.message ||
-          'No se pudo procesar el archivo CSV en https://smart-ats-0c5l.onrender.com/procesar-batch.'
+          'No se pudo procesar el archivo CSV en este momento. Por favor intenta nuevamente.'
       );
     } finally {
       setIsLoading(false);
@@ -84,15 +84,10 @@ export default function BatchUploadDropzone({ onBatchProcessed }) {
 
   return (
     <form onSubmit={handleUpload} className="space-y-6">
-      <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-[#111111]/10 pb-4">
-        <div>
-          <h3 className="text-[20px] font-medium text-[#111111] tracking-[-0.02em]">
-            Filtra y evalúa lotes CSV en memoria con Polars
-          </h3>
-          <p className="text-[16px] text-[#6b6b6b] mt-1">
-            Envía el archivo mediante <code className="font-mono text-[14px] text-[#111111]">FormData</code> a <code className="font-mono text-[14px] text-[#111111]">POST /procesar-batch</code>. Descarta perfiles con menos de 2 años.
-          </p>
-        </div>
+      <div className="border-b border-[#111111]/10 pb-4">
+        <h3 className="text-[20px] font-medium text-[#111111] tracking-[-0.02em]">
+          Evaluación masiva de candidatos en CSV
+        </h3>
       </div>
 
       <div
@@ -137,13 +132,13 @@ export default function BatchUploadDropzone({ onBatchProcessed }) {
           >
             <div className="space-y-0.5">
               <p className="text-[13px] font-medium text-[#1a4be0]">
-                Archivo listo para enviar en FormData
+                Archivo seleccionado
               </p>
               <p className="text-[18px] font-medium text-[#111111] font-mono">
                 {selectedFile.name}
               </p>
               <p className="text-[14px] text-[#6b6b6b]">
-                {(selectedFile.size / 1024).toFixed(2)} KB • Filtro Polars activo: experiencia_years &gt;= 2
+                {(selectedFile.size / 1024).toFixed(2)} KB
               </p>
             </div>
 
@@ -161,11 +156,7 @@ export default function BatchUploadDropzone({ onBatchProcessed }) {
 
       <ErrorAlert message={error} onClose={() => setError(null)} />
 
-      <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-        <p className="text-[14px] text-[#6b6b6b]">
-          Lectura en RAM con <code className="font-mono text-[13px] text-[#111111]">io.BytesIO</code> y persistencia por cada finalista.
-        </p>
-
+      <div className="flex items-center justify-end pt-2">
         <button
           type="submit"
           disabled={isLoading || !selectedFile}

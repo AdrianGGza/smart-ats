@@ -44,10 +44,7 @@ export default function App() {
         <section className="py-12 sm:py-20 bg-[#ffffff]">
           <div className="taste-wrap space-y-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-              <div className="lg:col-span-7 space-y-4">
-                <p className="text-[14px] font-medium text-[#6b6b6b]">
-                  Motor FastAPI en Render · Filtrado Polars (&ge; 2 años de experiencia) · Persistencia Supabase
-                </p>
+              <div className="lg:col-span-7">
                 <h1 className="taste-h1">
                   Evaluación de currículums para equipos de talento.
                 </h1>
@@ -55,7 +52,7 @@ export default function App() {
 
               <div className="lg:col-span-5 space-y-5">
                 <p className="text-[18px] leading-[1.55] text-[#111111]">
-                  Extrae habilidades técnicas y calcula el <code className="font-mono text-[15px]">match_score</code> de 0 a 100 desde documentos PDF o lotes CSV en un solo paso.
+                  Identifica habilidades clave, experiencia comprobada y nivel de compatibilidad con tus vacantes en segundos.
                 </p>
 
                 <div className="flex flex-wrap items-center gap-3">
@@ -87,21 +84,13 @@ export default function App() {
             >
               <div className="rounded-[14px] bg-[#ffffff] border border-[#111111]/12 overflow-hidden">
                 <div className="px-5 py-3.5 bg-[#f4f4f4] border-b border-[#111111]/10 flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-[13px] font-medium text-[#111111]">
-                      Consola de ingesta ATS
-                    </span>
-                    <span className="text-[#6b6b6b]">·</span>
-                    <span className="font-mono text-[12px] text-[#6b6b6b]">
-                      {activeTab === 'single'
-                        ? 'POST https://smart-ats-0c5l.onrender.com/analizar-pdf'
-                        : 'POST https://smart-ats-0c5l.onrender.com/procesar-batch'}
-                    </span>
-                  </div>
+                  <span className="text-[14px] font-medium text-[#111111]">
+                    Panel de evaluación de candidatos
+                  </span>
 
                   <div
                     role="tablist"
-                    aria-label="Seleccionar endpoint de entrada"
+                    aria-label="Seleccionar modo de carga"
                     className="inline-flex rounded-[8px] bg-[#ffffff] p-1 border border-[#111111]/12"
                   >
                     <button
@@ -115,7 +104,7 @@ export default function App() {
                           : 'text-[#6b6b6b] hover:text-[#111111]'
                       }`}
                     >
-                      1. Documento PDF (/analizar-pdf)
+                      Documentos PDF
                     </button>
                     <button
                       type="button"
@@ -128,7 +117,7 @@ export default function App() {
                           : 'text-[#6b6b6b] hover:text-[#111111]'
                       }`}
                     >
-                      2. Archivo CSV (/procesar-batch)
+                      Lote CSV
                     </button>
                   </div>
                 </div>
@@ -149,117 +138,37 @@ export default function App() {
           candidates={candidates}
           onClear={handleClearResults}
         />
-
-        <section id="arquitectura" className="py-24 bg-[#ffffff] border-t border-[#111111]/10">
-          <div className="taste-wrap grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-5 space-y-4">
-              <h2 className="taste-h2">
-                Flujo de validación en memoria.{' '}
-                <span className="text-[#6b6b6b]">
-                  De la petición HTTP a Supabase.
-                </span>
-              </h2>
-              <p className="text-[16px] leading-[1.6] text-[#111111]/85">
-                Cada petición valida estrictamente el esquema con Pydantic antes de registrar al candidato en PostgreSQL, garantizando tipos exactos para el puntaje y los años de experiencia.
-              </p>
-            </div>
-
-            <div className="lg:col-span-7">
-              <div className="taste-card taste-panel-sand p-6 sm:p-8">
-                <div className="rounded-[12px] bg-[#ffffff] border border-[#111111]/12 p-6 space-y-6">
-                  <div className="flex items-center justify-between border-b border-[#111111]/10 pb-4">
-                    <span className="text-[13px] font-medium text-[#111111]">
-                      Arquitectura de ejecución en la nube
-                    </span>
-                    <span className="font-mono text-[12px] text-[#1a4be0]">
-                      Pydantic · AnalisisCVCandidato
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="rounded-[10px] bg-[#f4f4f4] p-4 space-y-1.5 border border-[#111111]/8">
-                      <span className="font-mono text-[12px] text-[#6b6b6b]">01 · Entrada</span>
-                      <p className="text-[16px] font-medium text-[#111111]">
-                        PDF o CSV
-                      </p>
-                      <p className="text-[14px] text-[#6b6b6b]">
-                        Lectura directa en RAM mediante <code className="font-mono text-[12px]">io.BytesIO</code> y filtro Polars.
-                      </p>
-                    </div>
-
-                    <div className="rounded-[10px] bg-[#f4f4f4] p-4 space-y-1.5 border border-[#111111]/8">
-                      <span className="font-mono text-[12px] text-[#1a4be0]">02 · Inferencia</span>
-                      <p className="text-[16px] font-medium text-[#111111]">
-                        Google Gemini
-                      </p>
-                      <p className="text-[14px] text-[#6b6b6b]">
-                        Extracción estructurada con <code className="font-mono text-[12px]">model_json_schema()</code>.
-                      </p>
-                    </div>
-
-                    <div className="rounded-[10px] bg-[#f4f4f4] p-4 space-y-1.5 border border-[#111111]/8">
-                      <span className="font-mono text-[12px] text-[#6b6b6b]">03 · Registro</span>
-                      <p className="text-[16px] font-medium text-[#111111]">
-                        Supabase DB
-                      </p>
-                      <p className="text-[14px] text-[#6b6b6b]">
-                        Inserción inmediata en la tabla <code className="font-mono text-[12px]">candidatos</code>.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
-      <footer className="bg-[#111111] text-[#ffffff] py-16">
-        <div className="taste-wrap space-y-12">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-12 border-b border-white/15">
-            <div className="space-y-2">
-              <h2 className="text-[28px] sm:text-[36px] font-medium tracking-[-0.03em] text-[#ffffff]">
-                Evalúa tu próximo lote de candidatos hoy.
-              </h2>
-              <p className="text-[16px] text-[#9a9a9a]">
-                Conectado al servidor de producción en Render (smart-ats-0c5l.onrender.com).
-              </p>
-            </div>
+      <footer className="bg-[#111111] text-[#ffffff] py-12">
+        <div className="taste-wrap flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[14px] text-[#9a9a9a]">
+          <div className="flex items-center gap-3">
+            <span className="w-6 h-6 rounded-[5px] bg-[#ffffff] text-[#111111] inline-flex items-center justify-center font-mono text-[12px] font-medium">
+              S
+            </span>
+            <span className="text-[#ffffff] font-medium">Smart ATS</span>
+            <span>·</span>
+            <span>© {new Date().getFullYear()}</span>
+          </div>
 
+          <div className="flex flex-wrap gap-6">
             <a
               href="#workspace"
               onClick={() => setActiveTab('single')}
-              className="taste-btn-primary bg-[#ffffff] text-[#111111] hover:bg-[#f4f4f4] no-underline shrink-0"
+              className="text-[#9a9a9a] hover:text-[#ffffff] no-underline"
             >
-              <span>Evaluar candidato</span>
+              Evaluación PDF
             </a>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[14px] text-[#9a9a9a]">
-            <div className="flex items-center gap-3">
-              <span className="w-6 h-6 rounded-[5px] bg-[#ffffff] text-[#111111] inline-flex items-center justify-center font-mono text-[12px] font-medium">
-                S
-              </span>
-              <span className="text-[#ffffff] font-medium">Smart ATS</span>
-              <span>·</span>
-              <span>© {new Date().getFullYear()}</span>
-            </div>
-
-            <div className="flex flex-wrap gap-6">
-              <a href="#workspace" className="text-[#9a9a9a] hover:text-[#ffffff] no-underline">
-                Ingesta PDF
-              </a>
-              <a
-                href="#workspace"
-                onClick={() => setActiveTab('batch')}
-                className="text-[#9a9a9a] hover:text-[#ffffff] no-underline"
-              >
-                Procesamiento CSV
-              </a>
-              <a href="#resultados" className="text-[#9a9a9a] hover:text-[#ffffff] no-underline">
-                Resultados
-              </a>
-            </div>
+            <a
+              href="#workspace"
+              onClick={() => setActiveTab('batch')}
+              className="text-[#9a9a9a] hover:text-[#ffffff] no-underline"
+            >
+              Carga masiva CSV
+            </a>
+            <a href="#resultados" className="text-[#9a9a9a] hover:text-[#ffffff] no-underline">
+              Candidatos
+            </a>
           </div>
         </div>
       </footer>
