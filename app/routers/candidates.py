@@ -39,6 +39,8 @@ async def procesar_batch(file : UploadFile):
 
 @router.post('/analizar-pdf')
 async def procesar_pdf(file : UploadFile, criterios_vacante : str | None = Form(default=None))  :
+    if file.content_type != 'application/pdf':
+        raise HTTPException(status_code=400, detail="El archivo debe ser un PDF válido")
     contenido_bytes = await file.read() 
     pdf_virtual = io.BytesIO(contenido_bytes)
     texto_extraido = ''
