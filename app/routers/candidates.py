@@ -38,22 +38,32 @@ async def procesar_batch(file : UploadFile):
     return resultados_batch
 
 @router.post('/analizar-pdf')
-async def procesar_pdf(file : UploadFile, criterios_vacante : str | None = Form(default=None))  :
-    if file.content_type != 'application/pdf':
-        raise HTTPException(status_code=400, detail="El archivo debe ser un PDF válido")
-    contenido_bytes = await file.read() 
-    pdf_virtual = io.BytesIO(contenido_bytes)
-    texto_extraido = ''
-    lector = PdfReader(pdf_virtual)
+async def procesar_pdf(files : list[UploadFile], criterios_vacante : str | None = Form(default=None))  :
+    resultados_batch = []
 
-    for pagina in lector.pages:
-        texto_extraido+=pagina.extract_text() + "\n"
+    for file in files:
+        if file.content_type != 'application/pdf':
+            raise HTTPException(status_code=400, detail="El archivo debe ser un PDF válido") 
 
-    try:
-        resultado = await procesar_cv_gemini(texto_extraido,criterios_vacante)
-        guardar_candidato(resultado)
-        return resultado
-    except Exception as e:
-        raise HTTPException(status_code=500,detail=str(e))
+        
+        contenido_bytes = await file.read()
+        pdf_virtual = io.BytesIO(contenido_bytes)
+        lector = PdfReader(pdf_virtual)
+        
+        texto_extraido = ''
+        for pagina in lector.pages:
+            texto_extraido+=pagina.extract_text() + "\n"
+        try:
+            resultado = await procesar_cv_gemini(texto_extraido,criterios_vacante)
+            guardar_candidato(resultado)                                                
+            resultados_batch.append(resultado)
+            return resultado
+        except Exception as e:
+            raise HTTPException(status_code=500,detail=str(e))
+
+        return resultado 
+
+
+
 
     
