@@ -25,8 +25,8 @@ function getScoreMeta(score) {
   };
 }
 
-export default function CandidateResults({ candidates, onClear, onLoadDemo }) {
-  const [viewMode, setViewMode] = useState('cards'); // 'cards' | 'table'
+export default function CandidateResults({ candidates, onClear }) {
+  const [viewMode, setViewMode] = useState('cards');
 
   const hasCandidates = Array.isArray(candidates) && candidates.length > 0;
 
@@ -36,7 +36,6 @@ export default function CandidateResults({ candidates, onClear, onLoadDemo }) {
       className="py-24 bg-[#f4f4f4] border-t border-[#111111]/10"
     >
       <div className="taste-wrap space-y-12">
-        {/* Section Head (top-aligned on left line, layout-v4.md) */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3 max-w-[62ch]">
             <h2 className="taste-h2">
@@ -95,7 +94,6 @@ export default function CandidateResults({ candidates, onClear, onLoadDemo }) {
           </div>
         </div>
 
-        {/* Empty state or Results */}
         {!hasCandidates ? (
           <div className="taste-card bg-[#ffffff] flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div className="space-y-2 max-w-[58ch]">
@@ -106,24 +104,13 @@ export default function CandidateResults({ candidates, onClear, onLoadDemo }) {
                 Aún no se han procesado currículums en esta sesión
               </h3>
               <p className="text-[16px] text-[#6b6b6b]">
-                Utiliza el formulario superior para enviar un CV al endpoint{' '}
-                <code className="font-mono text-[14px] text-[#111111]">/analizar-cv</code> o sube un archivo CSV a{' '}
+                Utiliza el formulario superior para enviar documentos PDF al endpoint{' '}
+                <code className="font-mono text-[14px] text-[#111111]">/analizar-pdf</code> o sube un archivo CSV a{' '}
                 <code className="font-mono text-[14px] text-[#111111]">/procesar-batch</code>.
               </p>
             </div>
-
-            {onLoadDemo && (
-              <button
-                type="button"
-                onClick={onLoadDemo}
-                className="taste-btn-secondary shrink-0"
-              >
-                Previsualizar tarjetas con datos de muestra
-              </button>
-            )}
           </div>
         ) : viewMode === 'cards' ? (
-          /* Cards Grid (4+4+4 layout on 12-col grid, cards.md two-level rule: card > lit panel > UI fragment) */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {candidates.map((cand, idx) => {
               const score = Number(cand.match_score ?? 0);
@@ -138,7 +125,6 @@ export default function CandidateResults({ candidates, onClear, onLoadDemo }) {
                   key={`${cand.name}-${idx}`}
                   className="taste-card taste-card--interactive flex flex-col justify-between bg-[#ffffff]"
                 >
-                  {/* Top text block (Card title 20px/500 + 16px/24 body in ink, cards.md) */}
                   <div>
                     <div className="flex items-start justify-between gap-3">
                       <h3 className="text-[20px] leading-[28px] font-medium text-[#111111] truncate">
@@ -160,11 +146,9 @@ export default function CandidateResults({ candidates, onClear, onLoadDemo }) {
                     </p>
                   </div>
 
-                  {/* Lit Panel holding the real UI score fragment (cards.md: Two levels, never three) */}
                   <div
                     className={`mt-8 rounded-[12px] p-5 ${panelClass} flex flex-col justify-between min-h-[210px]`}
                   >
-                    {/* UI Fragment inside the lit panel */}
                     <div className="rounded-[10px] bg-[#ffffff] border border-[#111111]/12 p-4 space-y-4">
                       <div className="flex items-baseline justify-between">
                         <span className="text-[13px] font-medium text-[#6b6b6b]">
@@ -175,7 +159,6 @@ export default function CandidateResults({ candidates, onClear, onLoadDemo }) {
                         </span>
                       </div>
 
-                      {/* Accent appears once per fragment: the score bar */}
                       <div className="h-2 w-full rounded-full bg-[#f4f4f4] overflow-hidden">
                         <div
                           className="h-full rounded-full transition-all duration-500"
@@ -209,7 +192,6 @@ export default function CandidateResults({ candidates, onClear, onLoadDemo }) {
             })}
           </div>
         ) : (
-          /* Structured Table (.rows style with 1px rule closing each row, system.md) */
           <div className="taste-card bg-[#ffffff] p-0 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">

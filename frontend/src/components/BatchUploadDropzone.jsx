@@ -82,14 +82,6 @@ export default function BatchUploadDropzone({ onBatchProcessed }) {
     }
   };
 
-  const handleDownloadSampleCSV = (e) => {
-    e.stopPropagation();
-    const a = document.createElement('a');
-    a.href = '/candidatos.csv';
-    a.download = 'candidatos.csv';
-    a.click();
-  };
-
   return (
     <form onSubmit={handleUpload} className="space-y-6">
       <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-[#111111]/10 pb-4">
@@ -101,14 +93,6 @@ export default function BatchUploadDropzone({ onBatchProcessed }) {
             Envía el archivo mediante <code className="font-mono text-[14px] text-[#111111]">FormData</code> a <code className="font-mono text-[14px] text-[#111111]">POST /procesar-batch</code>. Descarta perfiles con menos de 2 años.
           </p>
         </div>
-
-        <button
-          type="button"
-          onClick={handleDownloadSampleCSV}
-          className="taste-btn-secondary h-[38px] px-4 text-[14px]"
-        >
-          Descargar CSV de prueba
-        </button>
       </div>
 
       <div

@@ -9,7 +9,6 @@ export default function Header({ totalEvaluados, activeTab, onSelectTab }) {
   return (
     <header className="fixed top-0 left-0 right-0 h-[56px] sm:h-[72px] bg-[#ffffff] border-b border-[#111111]/12 z-20">
       <div className="taste-wrap h-full flex items-center justify-between">
-        {/* Brand mark (stack geometry) + Wordmark */}
         <a
           href="#top"
           className="flex items-center gap-3 text-[#111111] no-underline group"
@@ -25,7 +24,6 @@ export default function Header({ totalEvaluados, activeTab, onSelectTab }) {
           </span>
         </a>
 
-        {/* Plain one-word nouns navigation (system.md rule) */}
         <nav aria-label="Navegación principal" className="hidden md:flex items-center gap-8">
           <button
             type="button"
@@ -62,7 +60,6 @@ export default function Header({ totalEvaluados, activeTab, onSelectTab }) {
           </a>
         </nav>
 
-        {/* Single main action button ending on the right edge */}
         <div className="flex items-center gap-4">
           <span className="hidden lg:inline-flex items-center gap-2 font-mono text-[13px] text-[#6b6b6b]">
             <span className="w-2 h-2 rounded-full bg-[#111111]" />

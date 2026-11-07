@@ -25,56 +25,6 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
     }
   };
 
-  const handleLoadSamplePDF = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const resp = await fetch('/cv_harvard_ejemplo.pdf');
-      if (!resp.ok) {
-        throw new Error('No se pudo cargar el PDF de ejemplo.');
-      }
-      const blob = await resp.blob();
-      const file = new File([blob], 'cv_harvard_ejemplo.pdf', { type: 'application/pdf' });
-      setSelectedFiles([file]);
-      setCriteriosVacante('Busco un desarrollador con experiencia sólida en Python, FastAPI, React y bases de datos.');
-    } catch (err) {
-      setError(err.message || 'Error al cargar el archivo PDF de prueba.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleLoadMultipleSamples = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const sampleNames = [
-        'cv_valeria_mendez_frontend.pdf',
-        'cv_jorge_castillo_backend.pdf',
-        'cv_sofia_navarro_data_ai.pdf',
-        'cv_esteban_reyes_devops.pdf',
-        'cv_lucia_ortiz_junior.pdf',
-      ];
-      const loadedFiles = [];
-      for (const name of sampleNames) {
-        const resp = await fetch(`/cvs_prueba/${name}`);
-        if (resp.ok) {
-          const blob = await resp.blob();
-          loadedFiles.push(new File([blob], name, { type: 'application/pdf' }));
-        }
-      }
-      if (loadedFiles.length === 0) {
-        throw new Error('No se pudieron cargar los archivos de prueba.');
-      }
-      setSelectedFiles(loadedFiles);
-      setCriteriosVacante('Buscamos candidatos con experiencia sólida en desarrollo web, arquitecturas cloud, microservicios o IA.');
-    } catch (err) {
-      setError(err.message || 'Error al cargar los CVs de prueba.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedFiles || selectedFiles.length === 0) {
@@ -112,34 +62,14 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
       <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-[#111111]/10 pb-4">
         <div>
           <h3 className="text-[20px] font-medium text-[#111111] tracking-[-0.02em]">
-            Evaluación de CVs en formato PDF (Múltiples archivos)
+            Evaluación de CVs en formato PDF
           </h3>
           <p className="text-[16px] text-[#6b6b6b] mt-1">
             Envía uno o varios documentos al endpoint <code className="font-mono text-[14px] text-[#111111]">POST /analizar-pdf</code> con <code className="font-mono text-[14px] text-[#111111]">multipart/form-data</code>.
           </p>
         </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={handleLoadSamplePDF}
-            disabled={isLoading}
-            className="taste-btn-secondary h-[38px] px-3.5 text-[13px]"
-          >
-            1 PDF (Harvard)
-          </button>
-          <button
-            type="button"
-            onClick={handleLoadMultipleSamples}
-            disabled={isLoading}
-            className="taste-btn-secondary h-[38px] px-3.5 text-[13px]"
-          >
-            Cargar 5 CVs de prueba
-          </button>
-        </div>
       </div>
 
-      {/* 1. Textarea opcional para los criterios de la vacante */}
       <div>
         <div className="flex items-center justify-between mb-2">
           <label
@@ -161,14 +91,13 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
         />
       </div>
 
-      {/* 2. Input de tipo file para subir múltiples PDFs */}
       <div>
         <div className="flex items-center justify-between mb-2">
           <label
             htmlFor="pdf-file-input"
             className="text-[13px] font-medium text-[#111111]"
           >
-            Currículum Vitae en formato PDF (Soporta selección múltiple)
+            Currículum Vitae en formato PDF
           </label>
           {selectedFiles.length > 0 && (
             <span className="font-mono text-[13px] text-[#6b6b6b]">
@@ -200,10 +129,10 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="space-y-1">
                 <p className="text-[16px] font-medium text-[#111111]">
-                  Haz clic para seleccionar o arrastra uno o varios archivos <span className="font-mono font-semibold">.pdf</span> aquí
+                  Haz clic para seleccionar uno o varios archivos <span className="font-mono font-semibold">.pdf</span>
                 </p>
                 <p className="text-[14px] text-[#6b6b6b]">
-                  Puedes seleccionar varios CVs a la vez (Ctrl o Shift para selección múltiple)
+                  Soporta carga individual o múltiple de currículums en PDF
                 </p>
               </div>
               <span className="taste-btn-secondary text-[14px] h-[38px] px-4 shrink-0 pointer-events-none">
@@ -235,7 +164,7 @@ export default function SingleCVForm({ onCandidateAnalyzed }) {
                     key={`${f.name}-${i}`}
                     className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[6px] bg-[#ffffff] border border-[#111111]/15 text-[12px] font-mono text-[#111111]"
                   >
-                    📄 {f.name}
+                    {f.name}
                   </span>
                 ))}
               </div>

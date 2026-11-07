@@ -4,29 +4,8 @@ import SingleCVForm from './components/SingleCVForm';
 import BatchUploadDropzone from './components/BatchUploadDropzone';
 import CandidateResults from './components/CandidateResults';
 
-const DEMO_CANDIDATES = [
-  {
-    name: 'María Fernanda Gómez',
-    experiencia_years: 6,
-    habilidades_tecnicas: ['Python', 'FastAPI', 'Polars', 'PostgreSQL', 'Docker', 'AWS'],
-    match_score: 94.5,
-  },
-  {
-    name: 'Andrés Silva',
-    experiencia_years: 5,
-    habilidades_tecnicas: ['Python', 'React', 'Supabase', 'TypeScript', 'SQL'],
-    match_score: 86.0,
-  },
-  {
-    name: 'Carlos Mendoza',
-    experiencia_years: 3,
-    habilidades_tecnicas: ['FastAPI', 'Pandas', 'Git', 'Linux'],
-    match_score: 72.0,
-  },
-];
-
 export default function App() {
-  const [activeTab, setActiveTab] = useState('single'); // 'single' | 'batch'
+  const [activeTab, setActiveTab] = useState('single');
   const [candidates, setCandidates] = useState([]);
 
   const handleSingleCandidate = (nuevoCandidato) => {
@@ -53,10 +32,6 @@ export default function App() {
     setCandidates([]);
   };
 
-  const handleLoadDemo = () => {
-    setCandidates(DEMO_CANDIDATES);
-  };
-
   return (
     <div id="top" className="min-h-screen flex flex-col bg-[#ffffff] text-[#111111]">
       <Header
@@ -66,10 +41,8 @@ export default function App() {
       />
 
       <main className="flex-1 pt-[56px] sm:pt-[72px]">
-        {/* Screen 1: Hero + Live App-Frame Workspace */}
         <section className="py-12 sm:py-20 bg-[#ffffff]">
           <div className="taste-wrap space-y-10">
-            {/* Hero Head Row: Category + Buyer in H1, Hard Fact in sub-line (copy.md Rules 1 & 2) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
               <div className="lg:col-span-7 space-y-4">
                 <p className="text-[14px] font-medium text-[#6b6b6b]">
@@ -108,13 +81,11 @@ export default function App() {
               </div>
             </div>
 
-            {/* Software App-Frame (sections.md: The product big across the .wrap) */}
             <div
               id="workspace"
               className="rounded-[20px] p-3 sm:p-5 taste-panel-sky border border-[#111111]/12"
             >
               <div className="rounded-[14px] bg-[#ffffff] border border-[#111111]/12 overflow-hidden">
-                {/* App Window Header */}
                 <div className="px-5 py-3.5 bg-[#f4f4f4] border-b border-[#111111]/10 flex flex-wrap items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <span className="font-mono text-[13px] font-medium text-[#111111]">
@@ -128,7 +99,6 @@ export default function App() {
                     </span>
                   </div>
 
-                  {/* Click-only mode tabs (motion.md: Tabs on software, click only) */}
                   <div
                     role="tablist"
                     aria-label="Seleccionar endpoint de entrada"
@@ -163,7 +133,6 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* App Window Body */}
                 <div className="p-6 sm:p-8">
                   {activeTab === 'single' ? (
                     <SingleCVForm onCandidateAnalyzed={handleSingleCandidate} />
@@ -176,14 +145,11 @@ export default function App() {
           </div>
         </section>
 
-        {/* Screen 2: Candidate Results (Cards & Table) */}
         <CandidateResults
           candidates={candidates}
           onClear={handleClearResults}
-          onLoadDemo={handleLoadDemo}
         />
 
-        {/* Screen 3: Pipeline Diagram & Technical Specs (sections.md: calm section before close) */}
         <section id="arquitectura" className="py-24 bg-[#ffffff] border-t border-[#111111]/10">
           <div className="taste-wrap grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5 space-y-4">
@@ -198,7 +164,6 @@ export default function App() {
               </p>
             </div>
 
-            {/* Diagram Card (SKILL.md rule 7: one input, a main processor, three parallel lanes) */}
             <div className="lg:col-span-7">
               <div className="taste-card taste-panel-sand p-6 sm:p-8">
                 <div className="rounded-[12px] bg-[#ffffff] border border-[#111111]/12 p-6 space-y-6">
@@ -215,7 +180,7 @@ export default function App() {
                     <div className="rounded-[10px] bg-[#f4f4f4] p-4 space-y-1.5 border border-[#111111]/8">
                       <span className="font-mono text-[12px] text-[#6b6b6b]">01 · Entrada</span>
                       <p className="text-[16px] font-medium text-[#111111]">
-                        JSON o CSV
+                        PDF o CSV
                       </p>
                       <p className="text-[14px] text-[#6b6b6b]">
                         Lectura directa en RAM mediante <code className="font-mono text-[12px]">io.BytesIO</code> y filtro Polars.
@@ -249,7 +214,6 @@ export default function App() {
         </section>
       </main>
 
-      {/* Footer.closing (system.md: row 1 dealt close, row 2 directory & legal) */}
       <footer className="bg-[#111111] text-[#ffffff] py-16">
         <div className="taste-wrap space-y-12">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-12 border-b border-white/15">
@@ -283,7 +247,7 @@ export default function App() {
 
             <div className="flex flex-wrap gap-6">
               <a href="#workspace" className="text-[#9a9a9a] hover:text-[#ffffff] no-underline">
-                Ingesta individual
+                Ingesta PDF
               </a>
               <a
                 href="#workspace"
