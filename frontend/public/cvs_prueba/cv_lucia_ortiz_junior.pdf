@@ -1,0 +1,72 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R >> >> /Contents 7 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Italic >>
+endobj
+7 0 obj
+<< /Length 2542 >>
+stream
+BT /F2 17 Tf 254.575 752 Td (LUCÍA ORTIZ) Tj ET
+BT /F1 9.5 Tf 40.56999999999999 737 Td (Puebla, México  |  \(222\) 598-1234  |  lucia.ortiz.dev@gmail.com  |  linkedin.com/in/luciaortiz-dev  |  github.com/luciao-junior) Tj ET
+BT /F2 11 Tf 40 719 Td (EDUCATION) Tj ET
+0.75 w 0 0 0 RG 40 716 m 572 716 l S
+BT /F2 10.5 Tf 40 703 Td (BENEMÉRITA UNIVERSIDAD AUTÓNOMA DE PUEBLA \(BUAP\)) Tj ET
+BT /F3 10 Tf 477 703 Td (Puebla, PUE) Tj ET
+BT /F3 10 Tf 40 691 Td (Licenciatura en Ciencias de la Computación \(Egresada\)) Tj ET
+BT /F1 10 Tf 512 691 Td (Diciembre 2024) Tj ET
+BT /F1 9.5 Tf 50 679 Td (- Promedio: 8.9/10. Participación activa en maratones de programación competitiva ACM-ICPC.) Tj ET
+BT /F1 9.5 Tf 50 668 Td (- Cursos relevantes: Estructuras de Datos, Programación Orientada a Objetos, Desarrollo Web Básico.) Tj ET
+BT /F2 11 Tf 40 653 Td (TECHNICAL SKILLS) Tj ET
+0.75 w 0 0 0 RG 40 650 m 572 650 l S
+BT /F2 9.5 Tf 40 637 Td (Languages:) Tj ET
+BT /F1 9.5 Tf 115 637 Td (JavaScript, Python básico, HTML5, CSS3, SQL básico) Tj ET
+BT /F2 9.5 Tf 40 625 Td (Tools & Frameworks:) Tj ET
+BT /F1 9.5 Tf 115 625 Td (React básico, Git, GitHub, VS Code, Linux, Postman) Tj ET
+BT /F2 9.5 Tf 40 613 Td (Soft Skills:) Tj ET
+BT /F1 9.5 Tf 115 613 Td (Trabajo en equipo colaborativo, comunicación ágil, aprendizaje proactivo) Tj ET
+BT /F2 11 Tf 40 597 Td (PROFESSIONAL EXPERIENCE) Tj ET
+0.75 w 0 0 0 RG 40 594 m 572 594 l S
+BT /F2 10.5 Tf 40 581 Td (INICIATIVA TECNOLÓGICA LOCAL) Tj ET
+BT /F3 10 Tf 452 581 Td (Enero 2024 - Diciembre 2024) Tj ET
+BT /F3 10 Tf 40 569 Td (Desarrolladora de Software Trainee / Becaria) Tj ET
+BT /F3 10 Tf 497 569 Td (Puebla, PUE) Tj ET
+BT /F1 9.5 Tf 50 557 Td (- Colaboró en el desarrollo de componentes modulares en React y corrección de estilos CSS responsivos.) Tj ET
+BT /F1 9.5 Tf 50 546 Td (- Escribió scripts en Python para la limpieza básica de datos y validación de formatos en hojas de cálculo.) Tj ET
+BT /F1 9.5 Tf 50 535 Td (- Participó en ceremonias Scrum de planificación, sprints semanales y revisión de pull requests.) Tj ET
+BT /F2 11 Tf 40 520 Td (KEY PROJECTS) Tj ET
+0.75 w 0 0 0 RG 40 517 m 572 517 l S
+BT /F2 10 Tf 40 504 Td (PORTAL ESTUDIANTIL DE RECURSOS) Tj ET
+BT /F3 9.5 Tf 352 504 Td (JavaScript, HTML5, CSS3, Firebase) Tj ET
+BT /F1 9.5 Tf 50 492 Td (- Aplicación web para intercambio de apuntes y recursos académicos con autenticación y subida de archivos.) Tj ET
+BT /F1 9.5 Tf 50 481 Td (- Diseño intuitivo y responsive para dispositivos móviles y de escritorio.) Tj ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+0000000333 00000 n 
+0000000404 00000 n 
+0000000477 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+3071
+%%EOF

@@ -30,7 +30,11 @@ export default function App() {
   const [candidates, setCandidates] = useState([]);
 
   const handleSingleCandidate = (nuevoCandidato) => {
-    setCandidates((prev) => [nuevoCandidato, ...prev]);
+    if (Array.isArray(nuevoCandidato)) {
+      setCandidates((prev) => [...nuevoCandidato, ...prev]);
+    } else if (nuevoCandidato) {
+      setCandidates((prev) => [nuevoCandidato, ...prev]);
+    }
     setTimeout(() => {
       document.getElementById('resultados')?.scrollIntoView({ behavior: 'auto' });
     }, 80);

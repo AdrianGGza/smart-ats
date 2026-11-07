@@ -1,0 +1,78 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R >> >> /Contents 7 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Italic >>
+endobj
+7 0 obj
+<< /Length 3021 >>
+stream
+BT /F2 17 Tf 240.55 752 Td (JORGE CASTILLO) Tj ET
+BT /F1 9.5 Tf 36 737 Td (Ciudad de México, México  |  \(55\) 4721-8930  |  jorge.castillo.py@gmail.com  |  linkedin.com/in/jorgecastillo-py  |  github.com/jorgec-backend) Tj ET
+BT /F2 11 Tf 40 719 Td (EDUCATION) Tj ET
+0.75 w 0 0 0 RG 40 716 m 572 716 l S
+BT /F2 10.5 Tf 40 703 Td (UNIVERSIDAD NACIONAL AUTÓNOMA DE MÉXICO \(UNAM\)) Tj ET
+BT /F3 10 Tf 477 703 Td (Ciudad de México, CDMX) Tj ET
+BT /F3 10 Tf 40 691 Td (Licenciatura en Ciencias de la Computación) Tj ET
+BT /F1 10 Tf 512 691 Td (Diciembre 2020) Tj ET
+BT /F1 9.5 Tf 50 679 Td (- Promedio: 9.2/10. Tesina en Algoritmos Distribuidos y Concurrencia en Python.) Tj ET
+BT /F1 9.5 Tf 50 668 Td (- Materias clave: Bases de Datos Avanzadas, Sistemas Distribuidos, Redes de Computadoras.) Tj ET
+BT /F2 11 Tf 40 653 Td (TECHNICAL SKILLS) Tj ET
+0.75 w 0 0 0 RG 40 650 m 572 650 l S
+BT /F2 9.5 Tf 40 637 Td (Languages:) Tj ET
+BT /F1 9.5 Tf 115 637 Td (Python 3.12, SQL \(PostgreSQL\), Go básico, Bash Scripting) Tj ET
+BT /F2 9.5 Tf 40 625 Td (Frameworks:) Tj ET
+BT /F1 9.5 Tf 115 625 Td (FastAPI, Polars, Pydantic, SQLAlchemy, Celery, Redis, Pytest) Tj ET
+BT /F2 9.5 Tf 40 613 Td (Tools & Cloud:) Tj ET
+BT /F1 9.5 Tf 115 613 Td (Docker, Kubernetes, AWS \(ECS, RDS, S3\), Supabase, Git, Postman) Tj ET
+BT /F2 11 Tf 40 597 Td (PROFESSIONAL EXPERIENCE) Tj ET
+0.75 w 0 0 0 RG 40 594 m 572 594 l S
+BT /F2 10.5 Tf 40 581 Td (FINPAY LATAM) Tj ET
+BT /F3 10 Tf 452 581 Td (Marzo 2022 - Presente) Tj ET
+BT /F3 10 Tf 40 569 Td (Senior Backend Engineer) Tj ET
+BT /F3 10 Tf 497 569 Td (Ciudad de México, CDMX) Tj ET
+BT /F1 9.5 Tf 50 557 Td (- Diseñó e implementó servicios asíncronos en FastAPI procesando más de 200,000 transacciones diarias con latencia menor a 40ms.) Tj ET
+BT /F1 9.5 Tf 50 546 Td (- Sustituyó pipelines basados en Pandas por Polars en memoria, logrando una aceleración de procesamiento de 5x en datasets transaccionales.) Tj ET
+BT /F1 9.5 Tf 50 535 Td (- Aseguró contratos de datos estrictos mediante modelos Pydantic y tipado estático con Mypy.) Tj ET
+BT /F2 10.5 Tf 40 520 Td (DATAVOX SYSTEMS) Tj ET
+BT /F3 10 Tf 452 520 Td (Enero 2021 - Febrero 2022) Tj ET
+BT /F3 10 Tf 40 508 Td (Backend Developer) Tj ET
+BT /F3 10 Tf 497 508 Td (Querétaro, QRO) Tj ET
+BT /F1 9.5 Tf 50 496 Td (- Construyó APIs RESTful en Python y gestionó migraciones automáticas con Alembic sobre PostgreSQL.) Tj ET
+BT /F1 9.5 Tf 50 485 Td (- Optimizó consultas SQL indexando tablas clave y reduciendo tiempos de respuesta de 650ms a 90ms.) Tj ET
+BT /F2 11 Tf 40 470 Td (KEY PROJECTS) Tj ET
+0.75 w 0 0 0 RG 40 467 m 572 467 l S
+BT /F2 10 Tf 40 454 Td (HIGH-SPEED RESUME INGESTION API) Tj ET
+BT /F3 9.5 Tf 352 454 Td (FastAPI, Polars, Supabase, Docker) Tj ET
+BT /F1 9.5 Tf 50 442 Td (- Servicio de ingestión masiva que lee archivos PDF/CSV directamente en memoria RAM usando io.BytesIO.) Tj ET
+BT /F1 9.5 Tf 50 431 Td (- Filtrado y validación de compatibilidad con Gemini Flash Lite y persistencia en PostgreSQL.) Tj ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+0000000333 00000 n 
+0000000404 00000 n 
+0000000477 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+3550
+%%EOF

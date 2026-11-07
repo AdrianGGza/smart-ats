@@ -1,25 +1,42 @@
 /**
- * Sube un archivo PDF y los criterios de la vacante al endpoint POST /analizar-pdf usando FormData
- * @param {File|Object} fileOrPayload - Archivo PDF seleccionado por el usuario u objeto { file, criterios_vacante }
+ * Sube uno o varios archivos PDF y los criterios de la vacante al endpoint POST /analizar-pdf usando FormData
+ * @param {File|File[]|FileList|Object} filesOrPayload - Archivo(s) PDF o payload con { files, criterios_vacante }
  * @param {string|null} [criteriosVacante=''] - Criterios opcionales de la vacante deseada
- * @returns {Promise<Object>} Resultado del análisis validado por el backend
+ * @returns {Promise<Object|Object[]>} Resultado(s) del análisis validado por el backend
  */
-export async function analizarPDF(fileOrPayload, criteriosVacante = '') {
+export async function analizarPDF(filesOrPayload, criteriosVacante = '') {
   const formData = new FormData();
 
-  let file = null;
+  let filesList = [];
   let criterios = '';
 
-  if (fileOrPayload instanceof File || fileOrPayload instanceof Blob) {
-    file = fileOrPayload;
+  if (filesOrPayload instanceof File || filesOrPayload instanceof Blob) {
+    filesList = [filesOrPayload];
     criterios = criteriosVacante || '';
-  } else if (fileOrPayload && typeof fileOrPayload === 'object') {
-    file = fileOrPayload.file;
-    criterios = fileOrPayload.criterios_vacante || '';
+  } else if (Array.isArray(filesOrPayload)) {
+    filesList = filesOrPayload;
+    criterios = criteriosVacante || '';
+  } else if (typeof FileList !== 'undefined' && filesOrPayload instanceof FileList) {
+    filesList = Array.from(filesOrPayload);
+    criterios = criteriosVacante || '';
+  } else if (filesOrPayload && typeof filesOrPayload === 'object') {
+    const rawFiles = filesOrPayload.files || filesOrPayload.file;
+    if (Array.isArray(rawFiles)) {
+      filesList = rawFiles;
+    } else if (typeof FileList !== 'undefined' && rawFiles instanceof FileList) {
+      filesList = Array.from(rawFiles);
+    } else if (rawFiles) {
+      filesList = [rawFiles];
+    }
+    criterios = filesOrPayload.criterios_vacante || '';
   }
 
-  if (file) {
-    formData.append('file', file);
+  // Se añaden los archivos con las llaves 'files' y 'file' para máxima compatibilidad
+  for (const f of filesList) {
+    formData.append('files', f);
+  }
+  if (filesList.length === 1) {
+    formData.append('file', filesList[0]);
   }
 
   if (criterios && typeof criterios === 'string' && criterios.trim() !== '') {

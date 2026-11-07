@@ -5,6 +5,7 @@ from app.services.db_service import guardar_candidato
 import io
 import polars as pl
 from PyPDF2 import  PdfReader
+from typing import List
 
 router = APIRouter()
 
@@ -38,7 +39,7 @@ async def procesar_batch(file : UploadFile):
     return resultados_batch
 
 @router.post('/analizar-pdf')
-async def procesar_pdf(files : list[UploadFile], criterios_vacante : str | None = Form(default=None))  :
+async def procesar_pdf(files : List[UploadFile] = File(...), criterios_vacante : str | None = Form(default=None))  :
     resultados_batch = []
 
     for file in files:
@@ -57,13 +58,7 @@ async def procesar_pdf(files : list[UploadFile], criterios_vacante : str | None 
             resultado = await procesar_cv_gemini(texto_extraido,criterios_vacante)
             guardar_candidato(resultado)                                                
             resultados_batch.append(resultado)
-            return resultado
         except Exception as e:
             raise HTTPException(status_code=500,detail=str(e))
 
-        return resultado 
-
-
-
-
-    
+    return resultados_batch 

@@ -1,0 +1,78 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R >> >> /Contents 7 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Italic >>
+endobj
+7 0 obj
+<< /Length 3000 >>
+stream
+BT /F2 17 Tf 245.225 752 Td (SOFÍA NAVARRO) Tj ET
+BT /F1 9.5 Tf 38.48000000000002 737 Td (Monterrey, México  |  \(81\) 8234-9012  |  sofia.navarro.ai@gmail.com  |  linkedin.com/in/sofianavarro-ai  |  github.com/sofian-ml) Tj ET
+BT /F2 11 Tf 40 719 Td (EDUCATION) Tj ET
+0.75 w 0 0 0 RG 40 716 m 572 716 l S
+BT /F2 10.5 Tf 40 703 Td (INSTITUTO TECNOLÓGICO Y DE ESTUDIOS SUPERIORES DE MONTERREY \(ITESM\)) Tj ET
+BT /F3 10 Tf 477 703 Td (Monterrey, NL) Tj ET
+BT /F3 10 Tf 40 691 Td (Ingeniería en Ciencia de Datos y Matemáticas Aplicadas) Tj ET
+BT /F1 10 Tf 512 691 Td (Mayo 2021) Tj ET
+BT /F1 9.5 Tf 50 679 Td (- Graduada con honores. Presidente de la Sociedad de Inteligencia Artificial Estudiantil.) Tj ET
+BT /F1 9.5 Tf 50 668 Td (- Cursos destacados: Aprendizaje Profundo, Minería de Texto, Modelos de Lenguaje \(LLMs\).) Tj ET
+BT /F2 11 Tf 40 653 Td (TECHNICAL SKILLS) Tj ET
+0.75 w 0 0 0 RG 40 650 m 572 650 l S
+BT /F2 9.5 Tf 40 637 Td (Languages:) Tj ET
+BT /F1 9.5 Tf 115 637 Td (Python, SQL, R, C++) Tj ET
+BT /F2 9.5 Tf 40 625 Td (AI & ML:) Tj ET
+BT /F1 9.5 Tf 115 625 Td (Google Gemini SDK, LangChain, PyTorch, Hugging Face, Scikit-learn, Vector Embeddings) Tj ET
+BT /F2 9.5 Tf 40 613 Td (Data & Cloud:) Tj ET
+BT /F1 9.5 Tf 115 613 Td (Polars, Pandas, Supabase \(pgvector\), Docker, FastAPI, Snowflake, MLflow) Tj ET
+BT /F2 11 Tf 40 597 Td (PROFESSIONAL EXPERIENCE) Tj ET
+0.75 w 0 0 0 RG 40 594 m 572 594 l S
+BT /F2 10.5 Tf 40 581 Td (COGNITIVE DATA LABS) Tj ET
+BT /F3 10 Tf 452 581 Td (Agosto 2022 - Presente) Tj ET
+BT /F3 10 Tf 40 569 Td (Machine Learning & LLM Engineer) Tj ET
+BT /F3 10 Tf 497 569 Td (Monterrey, NL) Tj ET
+BT /F1 9.5 Tf 50 557 Td (- Desarrolló canalizaciones de extracción estructurada de entidades usando Gemini 1.5 Flash y esquemas Pydantic.) Tj ET
+BT /F1 9.5 Tf 50 546 Td (- Construyó un motor de búsqueda semántica con pgvector en Supabase alcanzando 97% de precisión top-3.) Tj ET
+BT /F1 9.5 Tf 50 535 Td (- Procesó más de 10 millones de filas tabulares usando Polars para entrenamiento de modelos predictivos.) Tj ET
+BT /F2 10.5 Tf 40 520 Td (ANALYTICS MX) Tj ET
+BT /F3 10 Tf 452 520 Td (Junio 2021 - Julio 2022) Tj ET
+BT /F3 10 Tf 40 508 Td (Data Analyst / Junior Scientist) Tj ET
+BT /F3 10 Tf 497 508 Td (Monterrey, NL) Tj ET
+BT /F1 9.5 Tf 50 496 Td (- Construyó modelos de clasificación de texto y sentimiento para atención a clientes.) Tj ET
+BT /F1 9.5 Tf 50 485 Td (- Creó pipelines ETL automatizados en Python para ingesta y limpieza de datos no estructurados.) Tj ET
+BT /F2 11 Tf 40 470 Td (KEY PROJECTS) Tj ET
+0.75 w 0 0 0 RG 40 467 m 572 467 l S
+BT /F2 10 Tf 40 454 Td (SEMANTIC ATS MATCHING ENGINE) Tj ET
+BT /F3 9.5 Tf 352 454 Td (Python, Gemini SDK, Supabase Vector, Polars) Tj ET
+BT /F1 9.5 Tf 50 442 Td (- Sistema que evalúa la compatibilidad entre requisitos de vacantes y CVs mediante embeddings vectoriales.) Tj ET
+BT /F1 9.5 Tf 50 431 Td (- Cálculo de puntajes ponderados por experiencia técnica y validación en tiempo real.) Tj ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+0000000333 00000 n 
+0000000404 00000 n 
+0000000477 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+3529
+%%EOF
