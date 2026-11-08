@@ -24,7 +24,7 @@ export default function SemanticSearch() {
     setHasSearched(true);
 
     try {
-      const response = await fetch('http://localhost:8000/buscar-candidatos', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/buscar-candidatos`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ export default function SemanticSearch() {
     } catch (err) {
       setError(
         err.message ||
-          'No se pudo conectar con el motor de búsqueda semántica en http://localhost:8000/buscar-candidatos.'
+          'No se pudo conectar con el servicio de búsqueda semántica en este momento.'
       );
       setResultados([]);
     } finally {

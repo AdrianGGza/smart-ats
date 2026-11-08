@@ -31,7 +31,6 @@ export async function analizarPDF(filesOrPayload, criteriosVacante = '') {
     criterios = filesOrPayload.criterios_vacante || '';
   }
 
-  // Se añaden los archivos con las llaves 'files' y 'file' para máxima compatibilidad
   for (const f of filesList) {
     formData.append('files', f);
   }
@@ -45,8 +44,7 @@ export async function analizarPDF(filesOrPayload, criteriosVacante = '') {
     formData.append('criterios_vacante', '');
   }
 
-  // Sin header manual de Content-Type: el navegador asigna multipart/form-data y el boundary automáticamente
-  const response = await fetch('http://localhost:8000/analizar-pdf', {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/analizar-pdf`, {
     method: 'POST',
     body: formData,
   });
@@ -69,7 +67,6 @@ export async function analizarPDF(filesOrPayload, criteriosVacante = '') {
   return await response.json();
 }
 
-// Alias para compatibilidad con llamadas existentes
 export const analizarCV = analizarPDF;
 
 /**
@@ -81,7 +78,7 @@ export async function procesarBatchCSV(csvFile) {
   const formData = new FormData();
   formData.append('file', csvFile);
 
-  const response = await fetch('http://localhost:8000/procesar-batch', {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/procesar-batch`, {
     method: 'POST',
     body: formData,
   });

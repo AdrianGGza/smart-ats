@@ -5,7 +5,6 @@ from app.routers import candidates
 app = FastAPI(title="Smart ATS API")
 
 origenes_permitidos = [
-    "http://localhost:5173",
     "https://smart-ats-ashen.vercel.app"
 ]
 
