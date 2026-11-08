@@ -32,6 +32,22 @@ def guardar_candidato(datos : AnalisisCVCandidato):
         return response
         
     except Exception as e:
-        print(f"\n🚨 ERROR CRÍTICO AL GUARDAR EN SUPABASE 🚨")
+        print(f"\n🚨 ERROR CRÍTICO AL GUARDAR EN SUPABASE ")
         print(f"Detalle del error: {str(e)}\n")
+        raise e
+
+def buscar_similares_supabase(vector_busqueda : list[float], limite : int, umbral : float):
+    try:
+        respuesta = supabase.rpc(
+            "buscar_candidatos_similares",
+            {
+                "vector_busqueda": vector_busqueda,
+                "limite_resultados": limite,
+                "umbral_similitud": umbral
+            }
+        ).execute()
+        return respuesta.data
+    except Exception as e:
+        print(f"\nError al buscar en supabase")
+        print(f'Detalle: {str(e)}\n')
         raise e

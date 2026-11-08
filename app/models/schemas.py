@@ -14,3 +14,8 @@ class AnalisisCVCandidato(BaseModel):
         le=100,
         description= 'Compatibilidad del empleado con el puesto')
     embedding : list[float] | None = None
+
+class BusquedaSemantica(BaseModel):
+    consulta : str = Field(description= 'El texto de busqueda del reclutador')
+    limite_resultados : int = Field(description= 'Cuantos perfiles devolver como maximo')
+    umbral_similitud : float = Field(default=0.4, description= 'Que tan estrictos seremos con el match (0 a 1)')

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File, Form, BackgroundTasks
-from app.models.schemas import PeticionCV
+from app.models.schemas import PeticionCV, BusquedaSemantica
 from app.services.ia_services import procesar_cv_gemini, generar_embedding
-from app.services.db_service import guardar_candidato
+from app.services.db_service import guardar_candidato,buscar_similares_supabase
 from app.services.email_service import enviar_notificacion
 import io
 import polars as pl
@@ -74,3 +74,18 @@ async def procesar_pdf(background_task : BackgroundTasks, files : List[UploadFil
             raise HTTPException(status_code=500,detail=str(e))
 
     return resultados_batch 
+
+@router.post('/buscar-candidatos')
+async def buscar_candidatos(busqueda: BusquedaSemantica):
+    try:
+        vector_query = await generar_embedding(busqueda.consulta)
+
+        candidatos_compatibles = buscar_similares_supabase(
+            vector_busqueda=vector_query,
+            limite=busqueda.limite_resultados,
+            umbral=busqueda.umbral_similitud
+        )
+
+        return candidatos_compatibles
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

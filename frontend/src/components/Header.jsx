@@ -47,6 +47,9 @@ export default function Header({ totalEvaluados, activeTab, onSelectTab }) {
           >
             Carga masiva CSV
           </button>
+          <a href="#busqueda-semantica" className="taste-nav-link no-underline">
+            Búsqueda Semántica
+          </a>
           <a href="#resultados" className="taste-nav-link no-underline">
             Candidatos
             {totalEvaluados > 0 && (
@@ -59,11 +62,10 @@ export default function Header({ totalEvaluados, activeTab, onSelectTab }) {
 
         <div className="flex items-center gap-4">
           <a
-            href="#workspace"
-            onClick={() => onSelectTab('single')}
+            href="#busqueda-semantica"
             className="taste-btn-primary no-underline"
           >
-            <span>Evaluar candidato</span>
+            <span>Buscar candidatos</span>
             <svg
               className="m-arrow w-4 h-4"
               viewBox="0 0 16 16"

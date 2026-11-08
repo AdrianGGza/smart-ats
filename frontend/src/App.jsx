@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Header from './components/Header';
 import SingleCVForm from './components/SingleCVForm';
 import BatchUploadDropzone from './components/BatchUploadDropzone';
+import SemanticSearch from './components/SemanticSearch';
 import CandidateResults from './components/CandidateResults';
 
 export default function App() {
@@ -74,6 +75,12 @@ export default function App() {
                   >
                     <span>Subir lote CSV</span>
                   </button>
+                  <a
+                    href="#busqueda-semantica"
+                    className="taste-btn-secondary no-underline"
+                  >
+                    <span>Búsqueda Semántica</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -134,6 +141,8 @@ export default function App() {
           </div>
         </section>
 
+        <SemanticSearch />
+
         <CandidateResults
           candidates={candidates}
           onClear={handleClearResults}
@@ -165,6 +174,9 @@ export default function App() {
               className="text-[#9a9a9a] hover:text-[#ffffff] no-underline"
             >
               Carga masiva CSV
+            </a>
+            <a href="#busqueda-semantica" className="text-[#9a9a9a] hover:text-[#ffffff] no-underline">
+              Búsqueda Semántica
             </a>
             <a href="#resultados" className="text-[#9a9a9a] hover:text-[#ffffff] no-underline">
               Candidatos
