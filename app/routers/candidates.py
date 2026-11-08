@@ -1,7 +1,8 @@
-from fastapi import APIRouter, HTTPException, UploadFile, File, Form
+from fastapi import APIRouter, HTTPException, UploadFile, File, Form, BackgroundTasks
 from app.models.schemas import PeticionCV
 from app.services.ia_services import procesar_cv_gemini, generar_embedding
 from app.services.db_service import guardar_candidato
+from app.services.email_service import enviar_notificacion
 import io
 import polars as pl
 import pdfplumber
@@ -39,7 +40,7 @@ async def procesar_batch(file : UploadFile):
     return resultados_batch
 
 @router.post('/analizar-pdf')
-async def procesar_pdf(files : List[UploadFile] = File(...), criterios_vacante : str | None = Form(default=None))  :
+async def procesar_pdf(background_task : BackgroundTasks, files : List[UploadFile] = File(...), criterios_vacante : str | None = Form(default=None))  :
     resultados_batch = []
 
     for file in files:
@@ -54,14 +55,20 @@ async def procesar_pdf(files : List[UploadFile] = File(...), criterios_vacante :
         with pdfplumber.open(pdf_virtual) as pdf:
             for pagina in pdf.pages:
                 texto_extraido+=pagina.extract_text() + "\n"
-
-        print("Texto estraido del pdf")
-        print(texto_extraido[:250])
         try:
             resultado = await procesar_cv_gemini(texto_extraido,criterios_vacante)
             vector_cv = await generar_embedding(texto_extraido)
             resultado.embedding = vector_cv
-            guardar_candidato(resultado)                                                
+            guardar_candidato(resultado)
+
+            if resultado.email and resultado.email.strip() != "":
+                background_task.add_task(
+                    enviar_notificacion,
+                    resultado.name,
+                    "adriangalvan.dev@gmail.com",
+                    resultado.match_score
+                )
+
             resultados_batch.append(resultado)
         except Exception as e:
             raise HTTPException(status_code=500,detail=str(e))

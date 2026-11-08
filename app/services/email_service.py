@@ -29,11 +29,11 @@ def enviar_notificacion(nombre : str, email_destino : str, match_score : int):
     #Envio del correo
     try:
         r = resend.Emails.send({
-            'from' : 'Smart ATS <onboarding@resend.dev',
+            'from' : 'Smart ATS <onboarding@resend.dev>',
             'to' : email_destino,
             'subject' : asunto,
             'html' : cuerpo_html
         })
         print(f'Correo enviado exitosamente a {nombre} {email_destino}')
     except Exception as e:
-        print(f'Error al enviar correo a {email_destino}: {str:e}')
+        print(f'Error al enviar correo a {email_destino}: {str(e)}')
