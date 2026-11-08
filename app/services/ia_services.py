@@ -2,12 +2,12 @@ from google import genai
 import os
 from app.models.schemas import AnalisisCVCandidato
 from dotenv import load_dotenv
-
+import asyncio
 
 load_dotenv()
+client = genai.Client(api_key=os.environ.get('GEMINI_API_KEY'))
 
 async def procesar_cv_gemini(texto: str, criterios_vacante: str | None = None):
-    client = genai.Client(api_key=os.environ.get('GEMINI_API_KEY'))
 
     if criterios_vacante:
         prompt = f"Analiza el siguiente CV. Calcula el match_score basándote estrictamente en qué tan bien cumple con estos requerimientos específicos: {criterios_vacante}\n\nCV:\n{texto}"
@@ -28,3 +28,13 @@ async def procesar_cv_gemini(texto: str, criterios_vacante: str | None = None):
         raise ValueError('"La API de Gemini no devolvió texto (posible bloqueo de seguridad o error de red).')
     
     return AnalisisCVCandidato.model_validate_json(interaction.output_text)
+
+async def generar_embedding(texto: str) -> list[float]:
+    resultado = client.models.embed_content(
+        model='gemini-embedding-001',
+        contents=texto
+    )
+
+    if not resultado.embeddings or not resultado.embeddings[0].values:
+        raise ValueError('La API de Gemini no pudo devolver embeddings para el texto proporcionado')
+    return resultado.embeddings[0].values

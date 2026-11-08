@@ -12,3 +12,4 @@ class AnalisisCVCandidato(BaseModel):
         ge=0.0,
         le=100,
         description= 'Compatibilidad del empleado con el puesto')
+    embedding : list[float] | None = None

@@ -1,10 +1,10 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File, Form
 from app.models.schemas import PeticionCV
-from app.services.ia_services import procesar_cv_gemini
+from app.services.ia_services import procesar_cv_gemini, generar_embedding
 from app.services.db_service import guardar_candidato
 import io
 import polars as pl
-from PyPDF2 import  PdfReader
+import pdfplumber
 from typing import List
 
 router = APIRouter()
@@ -49,13 +49,18 @@ async def procesar_pdf(files : List[UploadFile] = File(...), criterios_vacante :
         
         contenido_bytes = await file.read()
         pdf_virtual = io.BytesIO(contenido_bytes)
-        lector = PdfReader(pdf_virtual)
-        
+
         texto_extraido = ''
-        for pagina in lector.pages:
-            texto_extraido+=pagina.extract_text() + "\n"
+        with pdfplumber.open(pdf_virtual) as pdf:
+            for pagina in pdf.pages:
+                texto_extraido+=pagina.extract_text() + "\n"
+
+        print("Texto estraido del pdf")
+        print(texto_extraido[:250])
         try:
             resultado = await procesar_cv_gemini(texto_extraido,criterios_vacante)
+            vector_cv = await generar_embedding(texto_extraido)
+            resultado.embedding = vector_cv
             guardar_candidato(resultado)                                                
             resultados_batch.append(resultado)
         except Exception as e:

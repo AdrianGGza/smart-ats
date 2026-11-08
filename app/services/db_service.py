@@ -14,12 +14,24 @@ if not url or not key:
 supabase: Client = create_client(url, key)
 
 def guardar_candidato(datos : AnalisisCVCandidato):
-    diccionario_limpio = datos.model_dump()
-
-    response = (
-        supabase.table('candidatos')
-        .insert(diccionario_limpio)
-        .execute()
-    )
-
-    return response
+    try:
+        diccionario_limpio = datos.model_dump()
+        
+        # Ajustado para buscar 'name' en lugar de 'nombre'
+        nombre_cv = diccionario_limpio.get('name') 
+        tiene_vector = "SÍ" if diccionario_limpio.get('embedding') else "NO (Es nulo)"
+        
+        print(f"\nIntentando guardar a: {nombre_cv} | Contiene vector: {tiene_vector}")
+        
+        response = supabase.table('candidatos').insert(diccionario_limpio).execute()
+        
+        # Usamos .get() de forma segura por si la base de datos devuelve una estructura distinta
+        nombre_guardado = response.data[0].get('name', 'Registro guardado')
+        print(f"✅ Éxito al guardar en Supabase: {nombre_guardado}\n")
+        
+        return response
+        
+    except Exception as e:
+        print(f"\n🚨 ERROR CRÍTICO AL GUARDAR EN SUPABASE 🚨")
+        print(f"Detalle del error: {str(e)}\n")
+        raise e

@@ -46,7 +46,7 @@ export async function analizarPDF(filesOrPayload, criteriosVacante = '') {
   }
 
   // Sin header manual de Content-Type: el navegador asigna multipart/form-data y el boundary automáticamente
-  const response = await fetch('https://smart-ats-0c5l.onrender.com/analizar-pdf', {
+  const response = await fetch('http://localhost:8000/analizar-pdf', {
     method: 'POST',
     body: formData,
   });
@@ -81,7 +81,7 @@ export async function procesarBatchCSV(csvFile) {
   const formData = new FormData();
   formData.append('file', csvFile);
 
-  const response = await fetch('https://smart-ats-0c5l.onrender.com/procesar-batch', {
+  const response = await fetch('http://localhost:8000/procesar-batch', {
     method: 'POST',
     body: formData,
   });

@@ -1,0 +1,78 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R >> >> /Contents 7 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Italic >>
+endobj
+7 0 obj
+<< /Length 2965 >>
+stream
+BT /F2 17 Tf 240.55 752 Td (VALERIA MÉNDEZ) Tj ET
+BT /F1 9.5 Tf 36 737 Td (Guadalajara, México  |  \(33\) 1982-4521  |  valeria.mendez.dev@gmail.com  |  linkedin.com/in/valeriamendez  |  github.com/valeriam-frontend) Tj ET
+BT /F2 11 Tf 40 719 Td (EDUCATION) Tj ET
+0.75 w 0 0 0 RG 40 716 m 572 716 l S
+BT /F2 10.5 Tf 40 703 Td (ITESO - UNIVERSIDAD JESUITA DE GUADALAJARA) Tj ET
+BT /F3 10 Tf 462 703 Td (Guadalajara, JAL) Tj ET
+BT /F3 10 Tf 40 691 Td (Ingeniería en Sistemas Computacionales) Tj ET
+BT /F1 10 Tf 507 691 Td (Junio 2020) Tj ET
+BT /F1 9.5 Tf 50 679 Td (- Especialidad en Arquitectura de Software y Sistemas Distribuidos con honores académicos.) Tj ET
+BT /F1 9.5 Tf 50 668 Td (- Certificación profesional en Frontend Architecture y Web Performance Optimization.) Tj ET
+BT /F2 11 Tf 40 653 Td (TECHNICAL SKILLS & SPECIALIZATIONS) Tj ET
+0.75 w 0 0 0 RG 40 650 m 572 650 l S
+BT /F2 9.5 Tf 40 637 Td (Frontend Core:) Tj ET
+BT /F1 9.5 Tf 130 637 Td (React 18, TypeScript, JavaScript ES6+, HTML5 semántico, CSS3 modular) Tj ET
+BT /F2 9.5 Tf 40 625 Td (Styling & Design:) Tj ET
+BT /F1 9.5 Tf 130 625 Td (TailwindCSS, Radix UI, Figma Tokens, Design Systems, Responsive Design) Tj ET
+BT /F2 9.5 Tf 40 613 Td (Tooling & State:) Tj ET
+BT /F1 9.5 Tf 130 613 Td (Vite, Next.js, Redux Toolkit, React Query, Jest, React Testing Library) Tj ET
+BT /F2 11 Tf 40 597 Td (PROFESSIONAL EXPERIENCE) Tj ET
+0.75 w 0 0 0 RG 40 594 m 572 594 l S
+BT /F2 10.5 Tf 40 581 Td (INNOVATECH SOLUTIONS) Tj ET
+BT /F3 10 Tf 442 581 Td (Julio 2021 - Presente) Tj ET
+BT /F3 10 Tf 40 569 Td (Senior Frontend Developer) Tj ET
+BT /F3 10 Tf 487 569 Td (Guadalajara, JAL) Tj ET
+BT /F1 9.5 Tf 50 557 Td (- Lideró la migración del panel ATS corporativo a React 18 con Vite y TailwindCSS mejorando la carga un 40%.) Tj ET
+BT /F1 9.5 Tf 50 546 Td (- Construyó componentes reactivos para visualización de scores de candidatos y carga de documentos PDF.) Tj ET
+BT /F1 9.5 Tf 50 535 Td (- Supervisó estándares de accesibilidad WCAG 2.1 AA y pruebas unitarias con Jest.) Tj ET
+BT /F2 10.5 Tf 40 520 Td (KAIZEN DIGITAL STUDIO) Tj ET
+BT /F3 10 Tf 442 520 Td (Enero 2019 - Junio 2021) Tj ET
+BT /F3 10 Tf 40 508 Td (Frontend Developer) Tj ET
+BT /F3 10 Tf 487 508 Td (Guadalajara, JAL) Tj ET
+BT /F1 9.5 Tf 50 496 Td (- Desarrolló dashboards analíticos para seguimiento de vacantes y pipelines de reclutamiento.) Tj ET
+BT /F1 9.5 Tf 50 485 Td (- Consumo eficiente de APIs RESTful asíncronas con gestión de estados globales.) Tj ET
+BT /F2 11 Tf 40 470 Td (KEY PROJECTS) Tj ET
+0.75 w 0 0 0 RG 40 467 m 572 467 l S
+BT /F2 10 Tf 40 454 Td (ENTERPRISE ATS RECRUITMENT UI) Tj ET
+BT /F3 9.5 Tf 352 454 Td (React, TailwindCSS, Vite, REST Client) Tj ET
+BT /F1 9.5 Tf 50 442 Td (- Interfaz intuitiva para carga masiva y evaluación de compatibilidad de currículums en tiempo real.) Tj ET
+BT /F1 9.5 Tf 50 431 Td (- Renderizado condicional optimizado de resultados estructurados en tablas y tarjetas.) Tj ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+0000000333 00000 n 
+0000000404 00000 n 
+0000000477 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+3494
+%%EOF
